@@ -6,14 +6,11 @@
 
 This repo includes my NixOS-WSL configuration files.
 
-> **Note**
+> [!NOTE]  
 >
 > This is my private NixOS configuration. There is no guarantee that it will work for you. I may forget to commit and push for months, or commit and push every hour.
 > 
 > I am no Nix expert. I'm just a Nix user.
-
-<br/>
-
 
 ## FAQ
 + **NixOS seems pretty cool! Should I join the hype train and use it?**
