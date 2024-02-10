@@ -10,7 +10,6 @@
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
-    inputs.nixvim.homeManagerModules.nixvim
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -20,7 +19,6 @@
     (import ../shared/programs/eza { })
     (import ../shared/programs/git { inherit lib pkgs; })
     (import ../shared/programs/htop { inherit config; })
-    (import ../shared/programs/nixvim { })
     (import ../shared/programs/starship { })
     (import ../shared/programs/zsh { inherit config pkgs inputs; colorIt = true; })
   ];
@@ -91,6 +89,7 @@
 
     packages = lib.attrValues {
       inherit (pkgs)
+        neovim
         trash-cli
         xdg-user-dirs
 

@@ -9,7 +9,6 @@
     stylix.url = "github:danth/stylix";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixvim.url = "github:nix-community/nixvim";
 
     # Nixpkgs branches
     stable.url = "github:nixos/nixpkgs/nixos-23.11";
