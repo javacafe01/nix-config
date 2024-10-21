@@ -1,8 +1,6 @@
-<h1 align="center">
-  javacafe01/nix-config
-  
-  [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
-</h1>
+[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=blue&labelColor=grey)](https://builtwithnix.org)
+
+# javacafe01/nix-config
 
 This repo includes my NixOS-WSL configuration files.
 
