@@ -2,8 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
-  outputs,
   ...
 }: {
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
@@ -38,12 +36,6 @@
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
 
-  terminal = {
-    font = "${pkgs.terminus-nerdfont}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
-  };
-
-  user = {
-    shell = "${pkgs.zsh}/bin/zsh";
-    userName = "javacafe";
-  };
+  terminal.font = "${pkgs.terminus-nerdfont}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
+  user.shell = "${pkgs.zsh}/bin/zsh";
 }

@@ -46,7 +46,6 @@
   outputs = {
     self,
     nixpkgs,
-    agenix,
     lix-module,
     home,
     nix-on-droid,

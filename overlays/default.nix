@@ -10,7 +10,7 @@
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = final: prev: {
+  modifications = _final: prev: {
     stable = import inputs.nixos {inherit (prev) system config;};
     unstable = import inputs.nixpkgs {inherit (prev) system config;};
     master = import inputs.master {inherit (prev) system config;};

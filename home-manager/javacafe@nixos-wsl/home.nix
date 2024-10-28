@@ -47,7 +47,7 @@
       #   });
       # })
 
-      (final: prev: {
+      (_final: prev: {
         ripgrep = prev.ripgrep.override {withPCRE2 = true;};
       })
     ];
