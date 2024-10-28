@@ -26,6 +26,8 @@
     # ./hardware-configuration.nix
   ];
 
+  console.keyMap = "us";
+
   nixpkgs = {
     # Configure your nixpkgs instance
     config = {
