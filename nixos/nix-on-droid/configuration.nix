@@ -39,6 +39,6 @@
   system.stateVersion = "24.05";
 
   terminal = {
-    font = "${pkgs.sfmonoNerdFontLig}/share/fonts/opentype/LigaSFMonoNerdFont-Regular.otf";
+    font = "${pkgs.terminus-nerdfont}/share/fonts/truetype/TerminessNerdFontMono-Regular ";
   };
 }
