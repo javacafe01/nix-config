@@ -24,6 +24,7 @@
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home";
     };
 
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
@@ -93,17 +94,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/nix-on-droid/configuration.nix
-          {
-            home-manager = {
-              extraSpecialArgs = {inherit inputs outputs;};
-              users.javacafe.imports = [(./. + "/home-manager/javacafe@nixos-wsl/home.nix")];
-              backupFileExtension = "hm-bak";
-              useGlobalPkgs = true;
-            };
-          }
         ];
-
-        home-manager-path = home.outPath;
       };
     };
 
