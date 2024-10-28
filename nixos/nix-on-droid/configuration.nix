@@ -9,19 +9,6 @@
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
 
-  nixpkgs = {
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-
-    # You can add overlays here
-    overlays = [
-      inputs.nix-on-droid.overlays.default
-    ];
-  };
-
   home-manager.config = {pkgs, ...}: {
     # system.os = "nix-on-droid";
     home.stateVersion = "24.05";
