@@ -16,8 +16,6 @@
       allowUnfree = true;
     };
 
-    hostPlatform = "aarch64-linux";
-
     # You can add overlays here
     overlays = [
       outputs.nix-on-droid.overlays.default
