@@ -1,5 +1,5 @@
 {
-  description = "Gokul's nix config";
+  description = "javacafe's nix config";
 
   inputs = {
     # Nixpkgs Repos
