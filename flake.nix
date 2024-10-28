@@ -20,6 +20,12 @@
     };
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
@@ -42,6 +48,7 @@
     agenix,
     lix-module,
     home,
+    nix-on-droid,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -78,6 +85,27 @@
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
+
+    # Nix-On-Droid (Termux, but Nix)
+    nixOnDroidConfigurations = {
+      nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs {system = "aarch64-linux";};
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/nix-on-droid/configuration.nix
+          {
+            home-manager = {
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.javacafe.imports = [(./. + "/home-manager/javacafe@nixos-wsl/home.nix")];
+              backupFileExtension = "hm-bak";
+              useGlobalPkgs = true;
+            };
+          }
+        ];
+
+        home-manager-path = home.outPath;
+      };
+    };
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

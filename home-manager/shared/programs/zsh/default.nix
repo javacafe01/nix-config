@@ -25,7 +25,6 @@
 
     initExtra = ''
       source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
-      fpath+="''\${0:A:h}/${pkgs.zsh-completions}/share/zsh/site-functions/"
 
       set -k
       setopt auto_cd
