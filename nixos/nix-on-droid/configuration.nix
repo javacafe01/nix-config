@@ -42,7 +42,7 @@
     font = "${pkgs.terminus-nerdfont}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
   };
 
-  users = {
+  user = {
     shell = "${pkgs.zsh}/bin/zsh";
     userName = "javacafe";
   };
