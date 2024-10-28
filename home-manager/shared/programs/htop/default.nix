@@ -1,4 +1,4 @@
-{config, ...}: {
+{lib, ...}: {
   programs.htop = {
     enable = true;
 
@@ -11,7 +11,7 @@
         show_program_path = false;
         show_thread_names = true;
 
-        fields = with config.lib.htop.fields; [
+        fields = with lib.htop.fields; [
           PID
           USER
           PRIORITY
@@ -26,9 +26,9 @@
           COMM
         ];
       }
-      // (with config.lib.htop;
+      // (with lib.htop;
           leftMeters [(bar "AllCPUs") (bar "Memory") (bar "Swap")])
-      // (with config.lib.htop;
+      // (with lib.htop;
         rightMeters [
           (bar "Zram")
           (text "Tasks")

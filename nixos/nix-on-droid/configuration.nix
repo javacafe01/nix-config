@@ -32,7 +32,7 @@
       (import ./../../home-manager/shared/programs/eza {})
       (import ./../../home-manager/shared/programs/fzf {})
       (import ./../../home-manager/shared/programs/git {inherit lib pkgs;})
-      (import ./../../home-manager/shared/programs/htop {inherit config;})
+      (import ./../../home-manager/shared/programs/htop {inherit lib;})
       (import ./../../home-manager/shared/programs/starship {})
       (import ./../../home-manager/shared/programs/zsh {
         inherit config pkgs;
