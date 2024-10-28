@@ -1,59 +1,59 @@
-{ inputs, config, lib, pkgs, ... }:
-
 {
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   console.keyMap = "us";
 
   environment = {
     binsh = "${pkgs.bash}/bin/bash";
-    shells = with pkgs; [ zsh ];
+    shells = with pkgs; [zsh];
 
     systemPackages = lib.attrValues {
-      inherit (pkgs)
-        alsa-tools alsa-utils cmake coreutils curl fd ffmpeg fzf gcc git glib
-        gnumake gnutls home-manager imagemagick iw libtool lm_sensors man-pages
-        man-pages-posix pamixer psmisc pulseaudio ripgrep unrar unzip vim
-        wget wirelesstools xarchiver xclip zip;
+      inherit
+        (pkgs)
+        cmake
+        coreutils
+        curl
+        fd
+        ffmpeg
+        fzf
+        gcc
+        git
+        glib
+        gnumake
+        gnutls
+        home-manager
+        imagemagick
+        libtool
+        lm_sensors
+        man-pages
+        man-pages-posix
+        ripgrep
+        unrar
+        unzip
+        vim
+        wget
+        xarchiver
+        xclip
+        zip
+        ;
     };
 
-    variables = {
-      EDITOR = "${pkgs.vim}/bin/vim";
-      "_JAVA_OPTIONS" = "-Dawt.useSystemAAFontSettings=lcd";
-      "_JAVA_AWT_WM_NONREPARENTING" = "1";
-    };
-  };
-
-  fonts = {
-    packages = lib.attrValues {
-      inherit (pkgs)
-        cantarell-fonts
-        liberation_ttf
-        noto-fonts-emoji-blob-bin
-        sarasa-gothic;
-
-      nerdfonts = pkgs.nerdfonts.override { fonts = [ "CascadiaCode" ]; };
-    };
-
-    fontconfig = {
-      enable = true;
-
-      defaultFonts = {
-        serif = [ "DejaVu Serif" ];
-        sansSerif = [ "Sarasa Term K" ];
-        monospace = [ "CaskaydiaCove Nerd Font Mono" ];
-        emoji = [ "Blobmoji" ];
-      };
-    };
+    variables.EDITOR = "${pkgs.vim}/bin/vim";
   };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = [ "en_US.UTF-8/UTF-8" ];
+    supportedLocales = ["en_US.UTF-8/UTF-8"];
   };
 
   nix = {
     # This will add each flake input as a registry
     # To make nix commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
@@ -130,13 +130,12 @@
     mutableUsers = true;
     defaultUserShell = pkgs.zsh;
 
-    users.gokulswami = {
-      description = "Gokul Swaminathan";
+    users.javacafe = {
+      description = "javacafe";
       isNormalUser = true;
-      home = "/home/gokulswami";
+      home = "/home/javacafe";
 
-      extraGroups =
-        [ "wheel" "networkmanager" "sudo" "video" "audio" "docker" ];
+      extraGroups = ["wheel" "networkmanager" "sudo" "video" "audio"];
     };
   };
 }

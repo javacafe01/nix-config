@@ -1,5 +1,9 @@
-{ stdenv, src, version, ... }:
-
+{
+  stdenv,
+  src,
+  version,
+  ...
+}:
 stdenv.mkDerivation {
   name = "SFMono-Nerd-Font-Ligaturized";
   inherit version;
@@ -11,5 +15,5 @@ stdenv.mkDerivation {
     cp -R $src/*.otf $out/share/fonts/opentype
   '';
 
-  meta = { description = "Apple's SFMono font nerd-font patched and ligaturized "; };
+  meta = {description = "Apple's SFMono font nerd-font patched and ligaturized ";};
 }

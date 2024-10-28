@@ -1,8 +1,6 @@
-{}:
-
-{
+_: {
   programs.eza = {
     enable = true;
-    enableAliases = false;
+    enableZshIntegration = true;
   };
 }

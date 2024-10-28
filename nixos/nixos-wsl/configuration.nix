@@ -1,9 +1,13 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
-{ inputs, outputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -56,7 +60,7 @@
   services = {
     dbus = {
       enable = true;
-      packages = [ pkgs.dconf ];
+      packages = [pkgs.dconf];
     };
 
     vscode-server.enable = true;
@@ -66,9 +70,23 @@
   system.stateVersion = "23.05";
   time.hardwareClockInLocalTime = true;
 
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    autoPrune.enable = true;
+  };
+
   wsl = {
     enable = true;
-    defaultUser = "gokulswami";
-    useWindowsDriver = true;
+
+    wslConf = {
+      automount.root = "/mnt";
+      interop.appendWindowsPath = false;
+      network.generateHosts = false;
+    };
+
+    defaultUser = "javacafe";
+    startMenuLaunchers = true;
+    docker-desktop.enable = false;
   };
 }

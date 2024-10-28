@@ -1,6 +1,4 @@
-_:
-
-''
+_: ''
   #> Syntax: bash
 
   # Author: GekkoP
