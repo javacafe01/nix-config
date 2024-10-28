@@ -18,7 +18,7 @@
 
     # You can add overlays here
     overlays = [
-      outputs.nix-on-droid.overlays.default
+      inputs.nix-on-droid.overlays.default
     ];
   };
 
