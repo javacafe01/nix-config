@@ -41,4 +41,9 @@
   terminal = {
     font = "${pkgs.terminus-nerdfont}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
   };
+
+  users = {
+    shell = "${pkgs.zsh}/bin/zsh";
+    userName = "javacafe";
+  };
 }
