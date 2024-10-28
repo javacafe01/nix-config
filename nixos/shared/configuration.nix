@@ -5,6 +5,8 @@
   pkgs,
   ...
 }: {
+  console.keyMap = "us";
+
   environment = {
     binsh = "${pkgs.bash}/bin/bash";
     shells = with pkgs; [zsh];
