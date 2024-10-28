@@ -23,7 +23,6 @@
     (import ../shared/programs/eza {})
     (import ../shared/programs/fzf {})
     (import ../shared/programs/git {inherit lib pkgs;})
-    (import ../shared/programs/htop {inherit lib;})
     (import ../shared/programs/starship {})
     (import ../shared/programs/zsh {
       inherit config pkgs;
