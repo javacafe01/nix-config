@@ -276,22 +276,6 @@
         "type": "github"
       }
     },
-    "fzf-tab": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1728610694,
-        "narHash": "sha256-4A7zpaO1rNPvS0rrmmxg56rJGpZHnw/g+x5FJd0EshI=",
-        "owner": "Aloxaf",
-        "repo": "fzf-tab",
-        "rev": "b6e1b22458a131f835c6fe65bdb88eb45093d2d2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Aloxaf",
-        "repo": "fzf-tab",
-        "type": "github"
-      }
-    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -734,7 +718,6 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "fzf-tab": "fzf-tab",
         "home": "home",
         "lix-module": "lix-module",
         "master": "master",
@@ -745,10 +728,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-f2k": "nixpkgs-f2k",
         "sfmonoNerdFontLig": "sfmonoNerdFontLig",
-        "vscode-server": "vscode-server",
-        "zsh-completions": "zsh-completions",
-        "zsh-nix-shell": "zsh-nix-shell",
-        "zsh-syntax-highlighting": "zsh-syntax-highlighting"
+        "vscode-server": "vscode-server"
       }
     },
     "rust-analyzer-src": {
@@ -875,54 +855,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixos-vscode-server",
-        "type": "github"
-      }
-    },
-    "zsh-completions": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729217548,
-        "narHash": "sha256-UQ4O0Nqa92BDnKw5UV72tXJsRIs2uCoXCELsnpZN3gE=",
-        "owner": "zsh-users",
-        "repo": "zsh-completions",
-        "rev": "066b069150074d9ac3e9dfed0aa5657dd0c84eba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zsh-users",
-        "repo": "zsh-completions",
-        "type": "github"
-      }
-    },
-    "zsh-nix-shell": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704028593,
-        "narHash": "sha256-Rtg8kWVLhXRuD2/Ctbtgz9MQCtKZOLpAIdommZhXKdE=",
-        "owner": "chisui",
-        "repo": "zsh-nix-shell",
-        "rev": "82ca15e638cc208e6d8368e34a1625ed75e08f90",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chisui",
-        "repo": "zsh-nix-shell",
-        "type": "github"
-      }
-    },
-    "zsh-syntax-highlighting": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704566212,
-        "narHash": "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=",
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
-        "rev": "e0165eaa730dd0fa321a6a6de74f092fe87630b0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
         "type": "github"
       }
     }

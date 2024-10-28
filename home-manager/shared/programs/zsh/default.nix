@@ -1,17 +1,15 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.zsh = {
     enable = true;
     autocd = true;
     autosuggestion.enable = true;
     enableCompletion = true;
+    enableVteIntegration = true;
+    syntaxHighlighting.enable = true;
     dotDir = ".config/zsh";
 
     shellAliases = {
-      ls = "eza --color=auto --icons";
+      ls = "eza";
       l = "ls -l";
       la = "ls -a";
       lla = "ls -la";
@@ -26,14 +24,17 @@
     };
 
     initExtra = ''
-        set -k
-        setopt auto_cd
-        export PATH="''${HOME}/.local/bin:''${HOME}/go/bin:''${HOME}/.emacs.d/bin:''${HOME}/.npm/bin:''${HOME}/.cargo/bin:''${PATH}"
-        setopt NO_NOMATCH   # disable some globbing
+      source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
+      fpath+="''\${0:A:h}/${pkgs.zsh-completions}/share/zsh/site-functions/"
 
-        function run() {
-          nix run nixpkgs#$@
-        }
+      set -k
+      setopt auto_cd
+      export PATH="''${HOME}/.local/bin:''${HOME}/go/bin:''${HOME}/.emacs.d/bin:''${HOME}/.npm/bin:''${HOME}/.cargo/bin:''${PATH}"
+      setopt NO_NOMATCH   # disable some globbing
+
+      function run() {
+        nix run nixpkgs#$@
+      }
 
       precmd() {
         printf '\033]0;%s\007' "$(dirs)"
@@ -41,27 +42,10 @@
 
       command_not_found_handler() {
         printf 'Command not found ->\033[32;05;16m %s\033[0m \n' "$0" >&2
-          return 127
+        return 127
       }
 
       export SUDO_PROMPT=$'Password for ->\033[32;05;16m %u\033[0m  '
-
-        FZF_TAB_COMMAND=(
-            ${pkgs.fzf}/bin/fzf
-            --ansi
-            --expect='$continuous_trigger' # For continuous completion
-            --nth=2,3 --delimiter='\x00'  # Don't search prefix
-            --layout=reverse --height="''${FZF_TMUX_HEIGHT:=50%}"
-            --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
-            '--query=$query'   # $query will be expanded to query string at runtime.
-            '--header-lines=$#headers' # $#headers will be expanded to lines of headers at runtime
-            )
-        zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
-
-        zstyle ':completion:complete:*:options' sort false
-        zstyle ':fzf-tab:complete:_zlua:*' query-string input
-
-        zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview.sh $realpath'
     '';
 
     history = {
@@ -69,26 +53,5 @@
       extended = true;
       save = 50000;
     };
-
-    plugins = [
-      {
-        name = "zsh-completions";
-        src = inputs.zsh-completions;
-      }
-      {
-        name = "fzf-tab";
-        src = inputs.fzf-tab;
-      }
-      {
-        name = "zsh-syntax-highlighting";
-        src = inputs.zsh-syntax-highlighting;
-        file = "zsh-syntax-highlighting.zsh";
-      }
-      {
-        name = "zsh-nix-shell";
-        src = inputs.zsh-nix-shell;
-        file = "nix-shell.plugin.zsh";
-      }
-    ];
   };
 }

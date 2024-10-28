@@ -21,11 +21,12 @@
     (import ../shared/programs/bat {})
     (import ../shared/programs/direnv {inherit config;})
     (import ../shared/programs/eza {})
+    (import ../shared/programs/fzf {})
     (import ../shared/programs/git {inherit lib pkgs;})
     (import ../shared/programs/htop {inherit config;})
     (import ../shared/programs/starship {})
     (import ../shared/programs/zsh {
-      inherit config pkgs inputs;
+      inherit config pkgs;
       colorIt = true;
     })
   ];
@@ -73,12 +74,6 @@
       ".local/bin/panes" = {
         executable = true;
         text = import ../shared/bin/panes.nix {};
-      };
-
-      ".local/bin/preview.sh" = {
-        # Preview script for fzf tab
-        executable = true;
-        text = import ../shared/bin/preview.nix {inherit pkgs;};
       };
     };
 

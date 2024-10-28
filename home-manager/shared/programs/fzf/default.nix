@@ -1,8 +1,6 @@
 _: {
-  programs.eza = {
+  programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    git = true;
-    icons = "auto";
   };
 }
