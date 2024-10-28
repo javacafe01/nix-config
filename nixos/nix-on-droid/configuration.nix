@@ -23,7 +23,7 @@
   };
 
   home-manager.config = {pkgs, ...}: {
-    system.os = "nix-on-droid";
+    # system.os = "nix-on-droid";
     home.stateVersion = "24.05";
     nixpkgs.overlays = config.nixpkgs.overlays;
     imports = [
