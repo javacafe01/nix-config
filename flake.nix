@@ -90,13 +90,8 @@
     # Nix-On-Droid (Termux, but Nix)
     nixOnDroidConfigurations = {
       nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = import nixpkgs {
-          system = "aarch64-linux";
-          overlays = import ./overlays {inherit inputs;};
-        };
-
+        pkgs = import nixpkgs {system = "aarch64-linux";};
         extraSpecialArgs = {inherit inputs outputs;};
-
         modules = [
           ./nixos/nix-on-droid/configuration.nix
         ];
