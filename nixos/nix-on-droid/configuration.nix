@@ -8,11 +8,6 @@
 }: {
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
-  
-  nixpkgs.overlays = [
-    outputs.overlays.modifications
-    outputs.overlays.additions
-  ];
 
   home-manager.config = {pkgs, ...}: {
     # system.os = "nix-on-droid";
