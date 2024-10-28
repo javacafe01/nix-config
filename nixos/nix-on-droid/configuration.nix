@@ -27,14 +27,14 @@
     home.stateVersion = "24.05";
     nixpkgs.overlays = config.nixpkgs.overlays;
     imports = [
-      (import ./../../shared/programs/bat {})
-      (import ./../../shared/programs/direnv {inherit config;})
-      (import ./../../shared/programs/eza {})
-      (import ./../../shared/programs/fzf {})
-      (import ./../../shared/programs/git {inherit lib pkgs;})
-      (import ./../../shared/programs/htop {inherit config;})
-      (import ./../../shared/programs/starship {})
-      (import ./../../shared/programs/zsh {
+      (import ./../../home-manager/shared/programs/bat {})
+      (import ./../../home-manager/shared/programs/direnv {inherit config;})
+      (import ./../../home-manager/shared/programs/eza {})
+      (import ./../../home-manager/shared/programs/fzf {})
+      (import ./../../home-manager/shared/programs/git {inherit lib pkgs;})
+      (import ./../../home-manager/shared/programs/htop {inherit config;})
+      (import ./../../home-manager/shared/programs/starship {})
+      (import ./../../home-manager/shared/programs/zsh {
         inherit config pkgs;
       })
     ];
