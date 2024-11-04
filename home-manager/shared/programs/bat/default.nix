@@ -4,7 +4,6 @@ _: {
     config = {
       pager = "never";
       style = "plain";
-      theme = "base16";
     };
   };
 }

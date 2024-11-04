@@ -9,17 +9,19 @@
     master.url = "github:nixos/nixpkgs";
 
     # Other Flake Inputs
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
@@ -27,7 +29,11 @@
       inputs.home-manager.follows = "home";
     };
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    nur.url = "github:nix-community/NUR";
+    stylix.url = "github:danth/stylix";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     nixos-wsl = {
@@ -45,10 +51,12 @@
 
   outputs = {
     self,
+    determinate,
     nixpkgs,
-    lix-module,
     home,
+    nix-index-database,
     nix-on-droid,
+    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -99,8 +107,10 @@
         };
 
         extraSpecialArgs = {inherit inputs outputs;};
+
         modules = [
           ./nixos/nix-on-droid/configuration.nix
+          nix-index-database.nixosModules.nix-index
         ];
       };
     };
@@ -112,12 +122,32 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/nixos-wsl/configuration.nix
-          lix-module.nixosModules.default
+
+          determinate.nixosModules.default
           home.nixosModules.home-manager
+          nix-index-database.nixosModules.nix-index
+
           {
             home-manager = {
               extraSpecialArgs = {inherit inputs outputs;};
               users.javacafe.imports = [(./. + "/home-manager/javacafe@nixos-wsl/home.nix")];
+            };
+          }
+        ];
+      };
+
+      winmaxtwo = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/winmaxtwo/configuration.nix
+          determinate.nixosModules.default
+          home.nixosModules.home-manager
+          nix-index-database.nixosModules.nix-index
+
+          {
+            home-manager = {
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.javacafe.imports = [(./. + "/home-manager/javacafe@winmaxtwo/home.nix")];
             };
           }
         ];

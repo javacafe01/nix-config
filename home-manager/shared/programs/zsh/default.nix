@@ -24,16 +24,13 @@
     };
 
     initExtra = ''
+      source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
       source ${pkgs.zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
 
       set -k
       setopt auto_cd
       export PATH="''${HOME}/.local/bin:''${HOME}/go/bin:''${HOME}/.emacs.d/bin:''${HOME}/.npm/bin:''${HOME}/.cargo/bin:''${PATH}"
       setopt NO_NOMATCH   # disable some globbing
-
-      function run() {
-        nix run nixpkgs#$@
-      }
 
       precmd() {
         printf '\033]0;%s\007' "$(dirs)"

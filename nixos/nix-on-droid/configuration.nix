@@ -8,7 +8,6 @@
   environment.etcBackupExtension = ".bak";
 
   home-manager.config = {pkgs, ...}: {
-    # system.os = "nix-on-droid";
     home.stateVersion = "24.05";
     nixpkgs.overlays = config.nixpkgs.overlays;
     imports = [
@@ -26,11 +25,32 @@
     home.packages = lib.attrValues {
       inherit
         (pkgs)
-        comma
         gh
         git
         neovim
         ;
+    };
+  };
+
+  programs = {
+    bash = {
+      interactiveShellInit = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+      '';
+
+      promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
+    };
+
+    command-not-found.enable = false;
+    nix-index-database.comma.enable = true;
+    ssh.startAgent = true;
+
+    zsh = {
+      enable = true;
+
+      interactiveShellInit = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+      '';
     };
   };
 

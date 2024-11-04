@@ -82,7 +82,16 @@
   };
 
   programs = {
-    bash.promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
+    bash = {
+      interactiveShellInit = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+      '';
+
+      promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
+    };
+
+    command-not-found.enable = false;
+    nix-index-database.comma.enable = true;
 
     nix-ld = {
       enable = true;
@@ -101,21 +110,14 @@
       ];
     };
 
-    npm = {
+    ssh.startAgent = true;
+    zsh = {
       enable = true;
-      npmrc = ''
-        prefix = ''${HOME}/.npm
-        color = true
+
+      interactiveShellInit = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
       '';
     };
-
-    java = {
-      enable = true;
-      package = pkgs.jre;
-    };
-
-    ssh.startAgent = true;
-    zsh.enable = true;
   };
 
   security.rtkit.enable = true;
