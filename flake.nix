@@ -56,7 +56,6 @@
     home,
     nix-index-database,
     nix-on-droid,
-    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
