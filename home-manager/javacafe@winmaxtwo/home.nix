@@ -18,10 +18,12 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    (import ../shared/xsession/awesome {inherit lib pkgs;})
 
     (import ../shared/programs/alacritty {inherit config;})
     (import ../shared/programs/bat {})
     (import ../shared/programs/direnv {inherit config;})
+    (import ../shared/programs/discord {inherit config pkgs;})
     (import ../shared/programs/eza {})
 
     (import ../shared/programs/firefox {
@@ -92,6 +94,7 @@
       # })
 
       (_final: prev: {
+        awesome = inputs.nixpkgs-f2k.packages.${_final.system}.awesome-luajit-git;
         picom = inputs.nixpkgs-f2k.packages.${_final.system}.picom-git;
         ripgrep = prev.ripgrep.override {withPCRE2 = true;};
       })
@@ -131,6 +134,10 @@
     packages = lib.attrValues {
       inherit
         (pkgs)
+        brightnessctl
+        inotify-tools
+        libnotify
+        pavucontrol
         gh
         neovim
         playerctl
@@ -201,7 +208,11 @@
     mpv.enable = true;
   };
 
-  services.playerctld.enable = true;
+  services = {
+    blueman-applet.enable = true;
+    network-manager-applet.enable = true;
+    playerctld.enable = true;
+  };
 
   stylix = {
     enable = true;

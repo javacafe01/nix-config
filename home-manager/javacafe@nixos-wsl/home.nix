@@ -21,6 +21,7 @@
 
     (import ../shared/programs/bat {})
     (import ../shared/programs/direnv {inherit config;})
+    (import ../shared/programs/discord {inherit config pkgs;})
     (import ../shared/programs/eza {})
     (import ../shared/programs/fzf {})
     (import ../shared/programs/git {inherit lib pkgs;})

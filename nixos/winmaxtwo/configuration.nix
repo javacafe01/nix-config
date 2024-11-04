@@ -69,7 +69,19 @@
     networkmanager.enable = true;
   };
 
-  programs.dconf.enable = true;
+  programs = {
+    dconf.enable = true;
+
+    thunar = {
+      enable = true;
+
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-media-tags-plugin
+        thunar-volman
+      ];
+    };
+  };
 
   services = {
     acpid.enable = true;
@@ -80,6 +92,24 @@
     };
 
     upower.enable = true;
+
+    xserver = {
+      enable = true;
+
+      displayManager = {
+        autoLogin = {
+          enable = false;
+          user = "javacafe";
+        };
+
+        defaultSession = "none+awesome";
+
+        lightdm = {
+          enable = true;
+          greeters.mini.enable = true;
+        };
+      };
+    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

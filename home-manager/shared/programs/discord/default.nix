@@ -59,7 +59,7 @@
 
     discordPackage = pkgs.discord.override {
       withOpenASAR = true;
-      withVencord = true;
+      withVencord = false;
     };
   };
 }
