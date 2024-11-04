@@ -91,6 +91,7 @@
       packages = [pkgs.dconf];
     };
 
+    hardware.bolt.enable = true;
     upower.enable = true;
 
     xserver = {
