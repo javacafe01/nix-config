@@ -14,16 +14,15 @@
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
+    inputs.nixcord.homeManagerModules.nixcord
     inputs.stylix.homeManagerModules.stylix
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    (import ../shared/xsession/awesome {inherit lib pkgs;})
-
-    (import ../shared/programs/alacritty {inherit config;})
     (import ../shared/programs/bat {})
     (import ../shared/programs/direnv {inherit config;})
-    (import ../shared/programs/discord {inherit config pkgs;})
+    # Fuck me, this doesn't work on Wayland/Niri... idk
+    # (import ../shared/programs/discord {inherit config pkgs;})
     (import ../shared/programs/eza {})
 
     (import ../shared/programs/firefox {
@@ -40,10 +39,11 @@
           id = 0;
 
           settings = {
-            "browser.startup.homepage" = "https://javacafe01.github.io/startpage/";
+            # "browser.startup.homepage" = "https://javacafe01.github.io/startpage/";
             "general.smoothScroll" = true;
           };
 
+          /*
           userChrome = import ../shared/programs/firefox/userChrome-css.nix {
             inherit config;
           };
@@ -51,21 +51,30 @@
           userContent = import ../shared/programs/firefox/userContent-css.nix {
             inherit config;
           };
+          */
 
           extraConfig = ''
             user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-            user_pref("full-screen-api.ignore-widgets", true);
             user_pref("media.ffmpeg.vaapi.enabled", true);
             user_pref("media.rdd-vpx.enabled", true);
             user_pref("extensions.pocket.enabled", false);
+
+            user_pref("browser.ml.chat.enabled", true);
+            user_pref("browser.ml.chat.provider", "https://chatgpt.com");
+            user_pref("sidebar.revamp", true);
+            user_pref("sidebar.main.tools", "aichat,syncedtabs,history,bookmarks");
+            user_pref("sidebar.visibility", "always-show");
+            user_pref("sidebar.vertialTabs", true);
           '';
         };
       };
     })
 
+    (import ../shared/programs/foot {})
+    (import ../shared/programs/fuzzel {})
     (import ../shared/programs/fzf {})
     (import ../shared/programs/git {inherit lib pkgs;})
-    (import ../shared/services/picom)
+    (import ../shared/programs/niri {inherit pkgs config lib;})
     (import ../shared/programs/starship {})
     (import ../shared/programs/vscode {inherit inputs pkgs;})
 
@@ -73,6 +82,9 @@
       inherit config pkgs;
       colorIt = true;
     })
+
+    (import ../shared/programs/zed {inherit pkgs lib;})
+    # (import ../shared/services/swaync)
   ];
 
   nixpkgs = {
@@ -84,7 +96,7 @@
 
       # You can also add overlays exported from other flakes:
       inputs.nixpkgs-f2k.overlays.stdenvs
-      inputs.nur.overlay
+      inputs.nur.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -94,8 +106,6 @@
       # })
 
       (_final: prev: {
-        awesome = inputs.nixpkgs-f2k.packages.${_final.system}.awesome-luajit-git;
-        picom = inputs.nixpkgs-f2k.packages.${_final.system}.picom-git;
         ripgrep = prev.ripgrep.override {withPCRE2 = true;};
       })
     ];
@@ -109,13 +119,15 @@
     };
   };
 
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
   fonts.fontconfig.enable = true;
 
   home = {
     file = {
-      # Amazing Phinger Icons
-      ".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors";
-
       # Bin Scripts
       ".local/bin/updoot" = {
         # Upload and get link
@@ -138,13 +150,15 @@
         inotify-tools
         libnotify
         pavucontrol
+        fractal
         gh
         neovim
+        nh
         playerctl
         trash-cli
+        vesktop
         xdg-user-dirs
         # Language servers
-        
         ccls
         clang
         clang-tools
@@ -153,7 +167,6 @@
         shellcheck
         sumneko-lua-language-server
         # Formatters
-        
         alejandra
         black
         ktlint
@@ -161,7 +174,6 @@
         shfmt
         stylua
         # Extras
-        
         deadnix
         editorconfig-core-c
         fd
@@ -209,8 +221,8 @@
   };
 
   services = {
-    blueman-applet.enable = true;
-    network-manager-applet.enable = true;
+    # blueman-applet.enable = true;
+    # network-manager-applet.enable = true;
     playerctld.enable = true;
   };
 
@@ -219,26 +231,7 @@
     autoEnable = false;
     image = ./assets/wall.jpg;
 
-    base16Scheme = {
-      scheme = "javacafe";
-      author = "javacafe01";
-      base00 = "131a21";
-      base01 = "f9929b";
-      base02 = "9ce5c0";
-      base03 = "fbdf90";
-      base04 = "a3b8ef";
-      base05 = "ccaced";
-      base06 = "9ce5c0";
-      base07 = "ffffff";
-      base08 = "3b4b58";
-      base09 = "fca2aa";
-      base0A = "a5d4af";
-      base0B = "fbeab9";
-      base0C = "bac8ef";
-      base0D = "d7c1ed";
-      base0E = "c7e5d6";
-      base0F = "eaeaea";
-    };
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
 
     fonts = {
       emoji = {
@@ -247,8 +240,8 @@
       };
 
       monospace = {
-        name = "Terminess Nerd Font Mono";
-        package = pkgs.nerdfonts.override {fonts = ["Terminus"];};
+        name = "Liga SFMono Nerd Font";
+        package = pkgs.sfmonoNerdFontLig;
       };
 
       sansSerif = {
@@ -258,15 +251,16 @@
 
       sizes = {
         applications = 8;
-        terminal = 8;
+        terminal = 10;
       };
     };
 
     polarity = "dark";
 
     targets = {
-      alacritty.enable = false;
       bat.enable = true;
+      foot.enable = true;
+      fuzzel.enable = true;
       fzf.enable = true;
 
       gtk = {
@@ -280,7 +274,7 @@
       };
 
       vim.enable = true;
-      xresources.enable = true;
+      vscode.enable = true;
     };
   };
 

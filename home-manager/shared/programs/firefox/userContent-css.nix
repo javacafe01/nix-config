@@ -1,8 +1,5 @@
-{ config }:
-
-with config.lib.stylix.colors;
-
-''
+{config}:
+with config.lib.stylix.colors; ''
   @namespace url("http://www.w3.org/1999/xhtml");
   :root{ scrollbar-color:  rgb(19,26,33) rgb(41,52,61) }
   *{ scrollbar-width: thin }

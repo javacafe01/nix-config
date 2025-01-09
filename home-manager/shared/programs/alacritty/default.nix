@@ -1,6 +1,4 @@
-{ config }:
-
-{
+{config}: {
   programs.alacritty = {
     enable = true;
 
@@ -31,7 +29,7 @@
           foreground = "0x${base06}";
         };
 
-        cursor = { cursor = "0x${base07}"; };
+        cursor = {cursor = "0x${base07}";};
 
         normal = {
           black = "0x${base01}";

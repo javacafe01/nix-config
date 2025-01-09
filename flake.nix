@@ -9,6 +9,7 @@
     master.url = "github:nixos/nixpkgs";
 
     # Other Flake Inputs
+    crane.url = "github:ipetkov/crane";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
 
     home = {
@@ -17,6 +18,8 @@
     };
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+    niri-flake.url = "github:sodiboo/niri-flake";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -30,7 +33,7 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixcord.url = "github:kaylorben/nixcord";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nur.url = "github:nix-community/NUR";
@@ -43,8 +46,12 @@
     };
 
     # Other Non-flake Inputs
+    cosmic-ext-alternative-startup-src = {
+      url = "github:Drakulix/cosmic-ext-alternative-startup";
+      flake = false;
+    };
 
-    sfmonoNerdFontLig = {
+    sfmonoNerdFontLig-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
     };
@@ -136,18 +143,19 @@
         ];
       };
 
-      winmaxtwo = nixpkgs.lib.nixosSystem {
+      framework = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/winmaxtwo/configuration.nix
+          ./nixos/framework/configuration.nix
           determinate.nixosModules.default
           home.nixosModules.home-manager
           nix-index-database.nixosModules.nix-index
 
           {
             home-manager = {
+              backupFileExtension = "hm-back1";
               extraSpecialArgs = {inherit inputs outputs;};
-              users.javacafe.imports = [(./. + "/home-manager/javacafe@winmaxtwo/home.nix")];
+              users.javacafe.imports = [(./. + "/home-manager/javacafe@framework/home.nix")];
             };
           }
         ];
@@ -156,14 +164,22 @@
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
-    # homeConfigurations = {
-    #   "javacafe@nixos-wsl" = home.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-    #     extraSpecialArgs = {inherit inputs outputs;};
-    #     modules = [
-    #       (./. + "/home-manager/javacafe@nixos-wsl/home.nix")
-    #     ];
-    #   };
-    # };
+    homeConfigurations = {
+      "javacafe@nixos-wsl" = home.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          (./. + "/home-manager/javacafe@nixos-wsl/home.nix")
+        ];
+      };
+
+      "javacafe@framework-fedora" = home.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          (./. + "/home-manager/javacafe@framework-fedora/home.nix")
+        ];
+      };
+    };
   };
 }

@@ -1,35 +1,37 @@
-{ inputs, pkgs, ... }:
-
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   marketplace-extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
     koihik.vscode-lua-format
     ms-python.isort
     ms-python.python
     ms-python.vscode-pylance
-    platformio.platformio-ide
     rvest.vs-code-prettier-eslint
     sndst00m.markdown-github-dark-pack
   ];
-in
-{
+in {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscode;
 
-    extensions = with pkgs.vscode-extensions; [
-      b4dm4n.vscode-nixpkgs-fmt
-      esbenp.prettier-vscode
-      jnoortheen.nix-ide
-      ms-vscode.cpptools
-      ms-toolsai.jupyter
-      ms-toolsai.jupyter-renderers
-      ms-toolsai.jupyter-keymap
-      ms-toolsai.vscode-jupyter-cell-tags
-      ms-toolsai.vscode-jupyter-slideshow
-      mkhl.direnv
-      sumneko.lua
-      xaver.clang-format
-    ] ++ marketplace-extensions;
+    extensions = with pkgs.vscode-extensions;
+      [
+        b4dm4n.vscode-nixpkgs-fmt
+        esbenp.prettier-vscode
+        jnoortheen.nix-ide
+        ms-vscode.cpptools
+        ms-toolsai.jupyter
+        ms-toolsai.jupyter-renderers
+        ms-toolsai.jupyter-keymap
+        ms-toolsai.vscode-jupyter-cell-tags
+        ms-toolsai.vscode-jupyter-slideshow
+        mkhl.direnv
+        sumneko.lua
+        xaver.clang-format
+      ]
+      ++ marketplace-extensions;
 
     mutableExtensionsDir = true;
 
@@ -60,11 +62,6 @@ in
 
       jupyter.askForKernelRestart = false;
       nix.serverPath = "${pkgs.nil}/bin/nil";
-
-      platformio-ide = {
-        useBuiltinPIOCore = false;
-        useBuiltinPython = false;
-      };
 
       terminal.integrated = {
         cursorBlinking = true;

@@ -5,7 +5,7 @@
     vSync = false;
 
     shadow = false;
-    shadowOffsets = [ (-7) (-7) ];
+    shadowOffsets = [(-7) (-7)];
     shadowOpacity = 0.8;
 
     shadowExclude = [

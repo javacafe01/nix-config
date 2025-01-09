@@ -15,10 +15,13 @@
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
-    inputs.nixos-hardware.nixosModules.gpd-win-max-2-2023
+    inputs.niri-flake.nixosModules.niri
+    inputs.nixos-cosmic.nixosModules.default
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
     # You can also split up your configuration and import pieces of it here:
     ../shared/configuration.nix
+    ../shared/scripts/start-cosmic-ext.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -41,6 +44,7 @@
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
+      inputs.niri-flake.overlays.niri
       inputs.nixpkgs-f2k.overlays.stdenvs
 
       # Or define it inline, for example:
@@ -55,6 +59,52 @@
   boot = {
     kernelPackages = pkgs.linuxPackages;
     loader.systemd-boot.enable = true;
+
+    plymouth = {
+      enable = true;
+      theme = "nixos-bgrt";
+      themePackages = with pkgs; [nixos-bgrt-plymouth];
+    };
+
+    # Enable "Silent Boot"
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+    ];
+
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
+
+  environment = {
+    variables.NIXOS_OZONE_WL = "1";
+    sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+
+    systemPackages = with pkgs; [
+      adwaita-icon-theme
+      foot
+      wl-clipboard
+      wayland-utils
+      libsecret
+      xwayland-satellite-unstable
+      swaybg
+
+      cosmic-ext-applet-clipboard-manager
+      cosmic-ext-applet-emoji-selector
+      cosmic-ext-calculator
+      cosmic-ext-tweaks
+      cosmic-reader
+    ];
   };
 
   hardware = {
@@ -65,55 +115,54 @@
   };
 
   networking = {
-    hostName = "winmaxtwo";
+    hostName = "framework";
     networkmanager.enable = true;
   };
 
   programs = {
     dconf.enable = true;
 
-    thunar = {
+    niri = {
       enable = true;
-
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-media-tags-plugin
-        thunar-volman
-      ];
+      package = pkgs.niri-unstable;
     };
+
+    seahorse.enable = true;
   };
 
   services = {
-    acpid.enable = true;
+    desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
 
-    dbus = {
-      enable = true;
-      packages = [pkgs.dconf];
-    };
+    flatpak.enable = true;
 
-    hardware.bolt.enable = true;
-    upower.enable = true;
-
-    xserver = {
+    /*
+    greetd = {
       enable = true;
 
-      displayManager = {
-        autoLogin = {
-          enable = false;
-          user = "javacafe";
-        };
-
-        defaultSession = "none+awesome";
-
-        lightdm = {
-          enable = true;
-          greeters.mini.enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.greetd}/bin/agreety --cmd niri";
         };
       };
     };
+    */
+
+    gvfs.enable = true;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
   time.hardwareClockInLocalTime = true;
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+
+    extraPortals = [
+      pkgs.xdg-desktop-portal-cosmic
+    ];
+
+    config.common.default = "*";
+  };
 }
