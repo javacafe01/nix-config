@@ -1,8 +1,8 @@
 {
   character = {
-    error_symbol = "[\\$](bold red)";
-    success_symbol = "[\\$](bold green)";
-    vicmd_symbol = "[\\$](bold yellow)";
+    error_symbol = "[>](bold red)";
+    success_symbol = "[>](bold green)";
+    vicmd_symbol = "[>](bold yellow)";
     format = "$symbol ";
   };
 

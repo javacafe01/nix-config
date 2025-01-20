@@ -14,7 +14,6 @@
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
-    inputs.nixcord.homeManagerModules.nixcord
     inputs.stylix.homeManagerModules.stylix
 
     # You can also split up your configuration and import pieces of it here:
@@ -39,11 +38,10 @@
           id = 0;
 
           settings = {
-            # "browser.startup.homepage" = "https://javacafe01.github.io/startpage/";
+            "browser.startup.homepage" = "https://javacafe01.github.io/startpage/";
             "general.smoothScroll" = true;
           };
 
-          /*
           userChrome = import ../shared/programs/firefox/userChrome-css.nix {
             inherit config;
           };
@@ -51,30 +49,23 @@
           userContent = import ../shared/programs/firefox/userContent-css.nix {
             inherit config;
           };
-          */
 
           extraConfig = ''
             user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
             user_pref("media.ffmpeg.vaapi.enabled", true);
             user_pref("media.rdd-vpx.enabled", true);
             user_pref("extensions.pocket.enabled", false);
-
-            user_pref("browser.ml.chat.enabled", true);
-            user_pref("browser.ml.chat.provider", "https://chatgpt.com");
-            user_pref("sidebar.revamp", true);
-            user_pref("sidebar.main.tools", "aichat,syncedtabs,history,bookmarks");
-            user_pref("sidebar.visibility", "always-show");
-            user_pref("sidebar.vertialTabs", true);
+            user_pref("extensions.autoDisableScopes", 0);
+            user_pref("extensions.enabledScopes", 15);
           '';
         };
       };
     })
 
-    (import ../shared/programs/foot {})
-    (import ../shared/programs/fuzzel {})
     (import ../shared/programs/fzf {})
+    (import ../shared/programs/ghostty {})
     (import ../shared/programs/git {inherit lib pkgs;})
-    (import ../shared/programs/niri {inherit pkgs config lib;})
+    (import ../shared/programs/niri {inherit pkgs config;})
     (import ../shared/programs/starship {})
     (import ../shared/programs/vscode {inherit inputs pkgs;})
 
@@ -83,8 +74,7 @@
       colorIt = true;
     })
 
-    (import ../shared/programs/zed {inherit pkgs lib;})
-    # (import ../shared/services/swaync)
+    # (import ../shared/programs/zed {inherit pkgs lib;})
   ];
 
   nixpkgs = {
@@ -106,6 +96,7 @@
       # })
 
       (_final: prev: {
+        ghostty = inputs.ghostty.packages.x86_64-linux.default;
         ripgrep = prev.ripgrep.override {withPCRE2 = true;};
       })
     ];
@@ -119,11 +110,6 @@
     };
   };
 
-  dconf = {
-    enable = true;
-    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  };
-
   fonts.fontconfig.enable = true;
 
   home = {
@@ -133,11 +119,6 @@
         # Upload and get link
         executable = true;
         text = import ../shared/bin/updoot.nix {inherit pkgs;};
-      };
-
-      ".local/bin/panes" = {
-        executable = true;
-        text = import ../shared/bin/panes.nix {};
       };
     };
 
@@ -152,8 +133,8 @@
         pavucontrol
         fractal
         gh
-        neovim
         nh
+        neovim
         playerctl
         trash-cli
         vesktop
@@ -203,9 +184,16 @@
       "${config.home.homeDirectory}/.local/bin"
     ];
 
+    /*
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+    };
+    */
+
     sessionVariables = {
-      BROWSER = "${pkgs.firefox}/bin/firefox";
-      EDITOR = "${pkgs.neovim}/bin/nvim";
+      BROWSER = "firefox";
+      EDITOR = "nvim";
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
       XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
     };
@@ -216,6 +204,7 @@
   };
 
   programs = {
+    fuzzel.enable = true;
     home-manager.enable = true;
     mpv.enable = true;
   };
@@ -223,7 +212,7 @@
   services = {
     # blueman-applet.enable = true;
     # network-manager-applet.enable = true;
-    playerctld.enable = true;
+    # playerctld.enable = true;
   };
 
   stylix = {
@@ -232,6 +221,12 @@
     image = ./assets/wall.jpg;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
+
+    cursor = {
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-dark";
+      size = 24;
+    };
 
     fonts = {
       emoji = {
@@ -245,12 +240,12 @@
       };
 
       sansSerif = {
-        name = "Sarasa Term K";
-        package = pkgs.sarasa-gothic;
+        name = "Inter";
+        package = pkgs.inter;
       };
 
       sizes = {
-        applications = 8;
+        applications = 10;
         terminal = 10;
       };
     };
@@ -259,22 +254,10 @@
 
     targets = {
       bat.enable = true;
-      foot.enable = true;
       fuzzel.enable = true;
       fzf.enable = true;
-
-      gtk = {
-        enable = true;
-
-        extraCss = ''
-          vte-terminal {
-            padding: 40px;
-          }
-        '';
-      };
-
+      gtk.enable = true;
       vim.enable = true;
-      vscode.enable = true;
     };
   };
 

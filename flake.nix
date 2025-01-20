@@ -11,13 +11,12 @@
     # Other Flake Inputs
     crane.url = "github:ipetkov/crane";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+    ghostty.url = "github:ghostty-org/ghostty";
 
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     niri-flake.url = "github:sodiboo/niri-flake";
 
@@ -33,7 +32,6 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nur.url = "github:nix-community/NUR";
@@ -43,12 +41,6 @@
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Other Non-flake Inputs
-    cosmic-ext-alternative-startup-src = {
-      url = "github:Drakulix/cosmic-ext-alternative-startup";
-      flake = false;
     };
 
     sfmonoNerdFontLig-src = {
@@ -173,11 +165,19 @@
         ];
       };
 
-      "javacafe@framework-fedora" = home.lib.homeManagerConfiguration {
+      "javacafe@fw-fedora" = home.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          (./. + "/home-manager/javacafe@framework-fedora/home.nix")
+          (./. + "/home-manager/javacafe@fw-fedora/home.nix")
+        ];
+      };
+
+      "javacafe@ubuntu-wsl" = home.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          (./. + "/home-manager/javacafe@ubuntu-wsl/home.nix")
         ];
       };
     };

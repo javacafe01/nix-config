@@ -16,12 +16,10 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
     inputs.niri-flake.nixosModules.niri
-    inputs.nixos-cosmic.nixosModules.default
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
     # You can also split up your configuration and import pieces of it here:
     ../shared/configuration.nix
-    ../shared/scripts/start-cosmic-ext.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -88,22 +86,16 @@
 
   environment = {
     variables.NIXOS_OZONE_WL = "1";
-    sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
     systemPackages = with pkgs; [
       adwaita-icon-theme
       foot
+      nautilus
       wl-clipboard
       wayland-utils
       libsecret
       xwayland-satellite-unstable
       swaybg
-
-      cosmic-ext-applet-clipboard-manager
-      cosmic-ext-applet-emoji-selector
-      cosmic-ext-calculator
-      cosmic-ext-tweaks
-      cosmic-reader
     ];
   };
 
@@ -122,6 +114,11 @@
   programs = {
     dconf.enable = true;
 
+    nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "ghostty";
+    };
+
     niri = {
       enable = true;
       package = pkgs.niri-unstable;
@@ -131,23 +128,12 @@
   };
 
   services = {
-    desktopManager.cosmic.enable = true;
-    displayManager.cosmic-greeter.enable = true;
-
-    flatpak.enable = true;
-
-    /*
-    greetd = {
+    xserver.displayManager.gdm = {
       enable = true;
-
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.greetd}/bin/agreety --cmd niri";
-        };
-      };
+      wayland = true;
     };
-    */
 
+    gnome.sushi.enable = true;
     gvfs.enable = true;
   };
 
@@ -160,7 +146,8 @@
     xdgOpenUsePortal = true;
 
     extraPortals = [
-      pkgs.xdg-desktop-portal-cosmic
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
     ];
 
     config.common.default = "*";

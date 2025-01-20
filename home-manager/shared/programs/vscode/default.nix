@@ -5,9 +5,7 @@
 }: let
   marketplace-extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
     koihik.vscode-lua-format
-    ms-python.isort
-    ms-python.python
-    ms-python.vscode-pylance
+    piousdeer.adwaita-theme
     rvest.vs-code-prettier-eslint
     sndst00m.markdown-github-dark-pack
   ];
@@ -18,15 +16,10 @@ in {
 
     extensions = with pkgs.vscode-extensions;
       [
-        b4dm4n.vscode-nixpkgs-fmt
         esbenp.prettier-vscode
         jnoortheen.nix-ide
+        kamadorueda.alejandra
         ms-vscode.cpptools
-        ms-toolsai.jupyter
-        ms-toolsai.jupyter-renderers
-        ms-toolsai.jupyter-keymap
-        ms-toolsai.vscode-jupyter-cell-tags
-        ms-toolsai.vscode-jupyter-slideshow
         mkhl.direnv
         sumneko.lua
         xaver.clang-format
@@ -44,8 +37,10 @@ in {
       "[html]".editor.defaultFormatter = "esbenp.prettier-vscode";
       "[javascript]".editor.defaultFormatter = "rvest.vs-code-prettier-eslint";
       "[lua]".editor.defaultFormatter = "Koihik.vscode-lua-format";
-      "[nix]".editor.defaultFormatter = "B4dM4n.nixpkgs-fmt";
+      "[nix]".editor.defaultFormatter = "kamadorueda.alejandra";
       "[python]".editor.formatOnType = true;
+
+      breadcrumbs.enabled = false;
 
       editor = {
         cursorBlinking = "smooth";
@@ -53,6 +48,7 @@ in {
         lineNumbers = "on";
         minimap.enabled = false;
         smoothScrolling = true;
+        stickyScroll.enabled = false;
 
         bracketPairColorization = {
           enabled = true;
@@ -72,10 +68,11 @@ in {
       window = {
         menuBarVisibility = "toggle";
         nativeTabs = true;
-        titleBarStyle = "native";
+        titleBarStyle = "custom";
       };
 
       workbench = {
+        colorTheme = "Adwaita Dark & default syntax highlighting";
         list.smoothScrolling = true;
         smoothScrolling = true;
       };
