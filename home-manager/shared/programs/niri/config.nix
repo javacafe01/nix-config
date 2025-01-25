@@ -12,8 +12,6 @@ with config.lib.stylix.colors; ''
     CLUTTER_BACKEND "wayland"
     DISPLAY ":0"
     GDK_BACKEND "wayland,x11"
-    MOZ_ENABLE_WAYLAND "1"
-    NIXOS_OZONE_WL "1"
     QT_QPA_PLATFORM "wayland;xcb"
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     SDL_VIDEODRIVER "wayland"
@@ -226,6 +224,7 @@ with config.lib.stylix.colors; ''
   // which may be more convenient to use.
   // See the binds section below for more spawn examples.
   spawn-at-startup "${pkgs.lib.getExe pkgs.swaybg}" "-c" "${base00}"
+  spawn-at-startup "${pkgs.cosmic-ext-alternative-startup}/bin/cosmic-ext-alternative-startup"
 
   // Uncomment this line to ask the clients to omit their client-side decorations if possible.
   // If the client will specifically ask for CSD, the request will be honored.
@@ -303,7 +302,7 @@ with config.lib.stylix.colors; ''
 
       // Suggested binds for running programs: terminal, app launcher, screen locker.
       Mod+T { spawn "ghostty"; }
-      Mod+D { spawn "fuzzel"; }
+      Mod+D { spawn "cosmic-launcher"; }
       Super+Alt+L { spawn "swaylock"; }
 
       // Float toggle

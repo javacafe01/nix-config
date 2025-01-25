@@ -32,6 +32,7 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nur.url = "github:nix-community/NUR";
@@ -41,6 +42,12 @@
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Other Non-flake Inputs
+    cosmic-ext-alternative-startup-src = {
+      url = "github:Drakulix/cosmic-ext-alternative-startup";
+      flake = false;
     };
 
     sfmonoNerdFontLig-src = {
