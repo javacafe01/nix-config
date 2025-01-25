@@ -14,6 +14,7 @@
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
+    inputs.cosmic-manager.homeManagerModules.cosmic-manager
     inputs.stylix.homeManagerModules.stylix
 
     # You can also split up your configuration and import pieces of it here:

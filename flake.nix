@@ -9,6 +9,15 @@
     master.url = "github:nixos/nixpkgs";
 
     # Other Flake Inputs
+    cosmic-manager = {
+      url = "github:HeitorAugustoLN/cosmic-manager";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home";
+      };
+    };
+
     crane.url = "github:ipetkov/crane";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
     ghostty.url = "github:ghostty-org/ghostty";
