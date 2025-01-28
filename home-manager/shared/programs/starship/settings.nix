@@ -1,8 +1,8 @@
 {
   character = {
-    error_symbol = "[>](bold red)";
-    success_symbol = "[>](bold green)";
-    vicmd_symbol = "[>](bold yellow)";
+    error_symbol = "[>>](bold red)";
+    success_symbol = "[>>](bold green)";
+    vicmd_symbol = "[>>](bold yellow)";
     format = "$symbol ";
   };
 
@@ -15,8 +15,8 @@
     disabled = false;
   };
 
-  line_break.disabled = true;
-  directory.disabled = true;
+  line_break.disabled = false;
+  directory.disabled = false;
   nodejs.disabled = true;
   nix_shell.symbol = "[](blue) ";
   python.symbol = "[](blue) ";

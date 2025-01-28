@@ -18,7 +18,7 @@
     settings = {
       git_protocol = "ssh";
       prompt = "enabled";
-      editor = "${pkgs.neovim}/bin/nvim";
+      editor = "${lib.getExe pkgs.neovim}";
     };
   };
 
@@ -26,5 +26,7 @@
     enable = true;
     userName = "Gokul Swaminathan";
     userEmail = "gokulswamilive@gmail.com";
+
+    extraConfig.core.editor = "${lib.getExe pkgs.neovim}";
   };
 }

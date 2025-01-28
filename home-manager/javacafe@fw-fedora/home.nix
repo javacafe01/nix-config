@@ -66,11 +66,6 @@
         executable = true;
         text = import ../shared/bin/updoot.nix {inherit pkgs;};
       };
-
-      ".local/bin/panes" = {
-        executable = true;
-        text = import ../shared/bin/panes.nix {};
-      };
     };
 
     homeDirectory = "/home/javacafe";
@@ -111,45 +106,6 @@
 
     home-manager.enable = true;
     mpv.enable = true;
-  };
-
-  stylix = {
-    enable = true;
-    autoEnable = false;
-    image = ./assets/wall.jpg;
-
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
-
-    fonts = {
-      emoji = {
-        name = "Blobmoji";
-        package = pkgs.noto-fonts-emoji-blob-bin;
-      };
-
-      monospace = {
-        name = "Liga SFMono Nerd Font";
-        package = pkgs.sfmonoNerdFontLig;
-      };
-
-      sansSerif = {
-        name = "Sarasa Term K";
-        package = pkgs.sarasa-gothic;
-      };
-
-      sizes = {
-        applications = 8;
-        terminal = 10;
-      };
-    };
-
-    polarity = "dark";
-
-    targets = {
-      bat.enable = true;
-      fuzzel.enable = true;
-      fzf.enable = true;
-      vim.enable = true;
-    };
   };
 
   systemd.user.startServices = "sd-switch";
