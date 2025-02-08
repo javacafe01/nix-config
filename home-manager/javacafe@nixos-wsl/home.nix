@@ -207,4 +207,6 @@
       videos = "${config.home.homeDirectory}/Videos";
     };
   };
+
+  targets.genericLinux.enable = true;
 }

@@ -1,11 +1,13 @@
 {
   pkgs,
   lib,
+  package,
   ...
 }: {
   programs.zed-editor = {
+    inherit package;
     enable = true;
-    extensions = ["nix" "make"];
+    extensions = ["nix" "make" "adwaita-pastel"];
 
     userSettings = {
       assistant = {
@@ -30,6 +32,16 @@
 
       hour_format = "hour12";
       auto_update = false;
+
+      ui_font_size = 16;
+      buffer_font_family = "Iosevka Nerd Font Mono"; 
+      buffer_font_size = 14;
+
+      theme = {
+        mode = "system";
+        light = "Adwaita Pastel Light";
+        dark = "Adwaita Pastel Dark";
+      };
 
       terminal = {
         alternate_scroll = "off";

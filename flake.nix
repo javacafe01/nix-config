@@ -41,17 +41,19 @@
     };
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixgl.url = "github:nix-community/nixGL";
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-    nur.url = "github:nix-community/NUR";
-    stylix.url = "github:danth/stylix";
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur.url = "github:nix-community/NUR";
+    stylix.url = "github:danth/stylix";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # Other Non-flake Inputs
     cosmic-ext-alternative-startup-src = {
@@ -186,6 +188,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           (./. + "/home-manager/javacafe@fw-fedora/home.nix")
+          nix-index-database.hmModules.nix-index
         ];
       };
 

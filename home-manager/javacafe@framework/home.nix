@@ -64,7 +64,11 @@
     })
 
     (import ../shared/programs/fzf {})
-    (import ../shared/programs/ghostty {})
+
+    (import ../shared/programs/ghostty {
+      package = pkgs.ghostty;
+    })
+
     (import ../shared/programs/git {inherit lib pkgs;})
     (import ../shared/programs/niri {inherit pkgs config;})
     (import ../shared/programs/starship {})

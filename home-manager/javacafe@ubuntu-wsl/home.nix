@@ -153,4 +153,5 @@
   };
 
   systemd.user.startServices = "sd-switch";
+  targets.genericLinux.enable = true;
 }

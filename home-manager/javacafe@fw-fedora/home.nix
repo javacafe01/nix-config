@@ -22,7 +22,13 @@
     (import ../shared/programs/direnv {inherit config;})
     (import ../shared/programs/eza {})
     (import ../shared/programs/fzf {})
-    (import ../shared/programs/git {inherit lib pkgs;})
+
+    (import ../shared/programs/ghostty {
+      # Use the included homemanager nixGL wrapper script to run ghostty
+      package = config.lib.nixGL.wrap pkgs.ghostty;
+    })
+
+    (import ../shared/programs/git {inherit pkgs lib;})
     (import ../shared/programs/starship {})
 
     (import ../shared/programs/zsh {
@@ -58,6 +64,8 @@
     };
   };
 
+  fonts.fontconfig.enable = true;
+
   home = {
     file = {
       # Bin Scripts
@@ -86,6 +94,10 @@
         deadnix
         statix
         ;
+
+      inherit
+      (pkgs.nerd-fonts)
+      iosevka;
     };
 
     sessionPath = [
@@ -97,6 +109,12 @@
     username = "javacafe";
   };
 
+  # Allows us to use nixGL with a homemanager install not on NixOS
+  nixGL.packages = inputs.nixgl.packages;
+  nixGL.defaultWrapper = "mesa";
+  nixGL.offloadWrapper = "nvidiaPrime";
+  nixGL.installScripts = ["mesa" "nvidiaPrime"];
+
   programs = {
     bash = {
       enable = true;
@@ -106,7 +124,9 @@
 
     home-manager.enable = true;
     mpv.enable = true;
+    nix-index-database.comma.enable = true;
   };
 
   systemd.user.startServices = "sd-switch";
+  targets.genericLinux.enable = true;
 }
