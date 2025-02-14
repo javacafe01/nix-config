@@ -1,7 +1,5 @@
-{package, ...}: {
+{
   programs.ghostty = {
-    inherit package;
-
     enable = true;
     enableZshIntegration = true;
 
@@ -9,11 +7,14 @@
       command = "~/.nix-profile/bin/zsh";
       cursor-style = "underline";
       cursor-style-blink = true;
-      font-size = 11;
-      font-family = "Iosevka Nerd Font Mono";
       window-padding-x = 20;
       window-padding-y = 20;
-      theme = "carbonfox";
+      window-decoration = "server";
+      window-theme = "auto";
+      gtk-adwaita = true;
+      gtk-tabs-location = "bottom";
+      gtk-titlebar-hide-when-maximized = true;
+      adw-toolbar-style = "flat";
     };
   };
 }

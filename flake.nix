@@ -19,7 +19,6 @@
     };
 
     crane.url = "github:ipetkov/crane";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
     ghostty.url = "github:ghostty-org/ghostty";
 
     home = {
@@ -69,7 +68,6 @@
 
   outputs = {
     self,
-    determinate,
     nixpkgs,
     home,
     nix-index-database,
@@ -140,7 +138,6 @@
         modules = [
           ./nixos/nixos-wsl/configuration.nix
 
-          determinate.nixosModules.default
           home.nixosModules.home-manager
           nix-index-database.nixosModules.nix-index
 
@@ -157,7 +154,6 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/framework/configuration.nix
-          determinate.nixosModules.default
           home.nixosModules.home-manager
           nix-index-database.nixosModules.nix-index
 

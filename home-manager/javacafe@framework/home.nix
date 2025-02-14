@@ -39,7 +39,7 @@
           id = 0;
 
           settings = {
-            "browser.startup.homepage" = "https://javacafe01.github.io/startpage/";
+            "browser.startup.homepage" = "https://gokulswam.github.io/";
             "general.smoothScroll" = true;
           };
 

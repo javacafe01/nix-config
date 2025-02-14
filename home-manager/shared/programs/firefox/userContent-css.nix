@@ -7,7 +7,7 @@ with config.lib.stylix.colors; ''
 
   @-moz-document url("about:newtab"), url("about:home") {
     body {
-      background-color: #${base01} !important;
+      background-color: #${base00} !important;
     }
 
     .logo-and-wordmark {

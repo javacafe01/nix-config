@@ -1,11 +1,6 @@
-{
-  package,
-  profiles,
-  ...
-}: {
+{profiles, ...}: {
   programs.firefox = {
     enable = true;
-    inherit package;
     inherit profiles;
   };
 }
