@@ -173,24 +173,24 @@
     image = ../../assets/wall.jpg;
 
     base16Scheme = {
-      scheme = "carbonfox";
-      author = "EdenEast";
-      base00 = "161616";
-      base01 = "252525";
-      base02 = "353535";
-      base03 = "484848";
-      base04 = "7b7c7e";
-      base05 = "f2f4f8";
-      base06 = "b6b8bb";
-      base07 = "e4e4e5";
-      base08 = "ee5396";
-      base09 = "3ddbd9";
-      base0A = "08bdba";
-      base0B = "25be6a";
-      base0C = "33b1ff";
-      base0D = "78a9ff";
-      base0E = "be95ff";
-      base0F = "ff7eb6";
+      scheme = "houseki";
+      author = "BanchouBoo";
+      base00 = "101010";
+      base01 = "1c1c1c";
+      base02 = "2e2e2e";
+      base03 = "8ba2a2";
+      base04 = "99cccc";
+      base05 = "cbf3f3";
+      base06 = "cbf3f3";
+      base07 = "cbf3f3";
+      base08 = "a33c3d";
+      base09 = "a36a3c";
+      base0A = "a3b370";
+      base0B = "46a468";
+      base0C = "49acaa";
+      base0D = "5ca4cc";
+      base0E = "bd7bb5";
+      base0F = "6b292a";
     };
 
     cursor = {
