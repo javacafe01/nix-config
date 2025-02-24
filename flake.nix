@@ -30,11 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nixcord.url = "github:kaylorben/nixcord";
     nixgl.url = "github:nix-community/nixGL";
@@ -67,7 +62,6 @@
     self,
     nixpkgs,
     home,
-    nix-on-droid,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -98,32 +92,6 @@
     homeManagerModules = import ./modules/home-manager;
 
     # NixOS configuration entrypoint
-
-    nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-      pkgs = import nixpkgs {
-        system = "aarch64-linux";
-
-        overlays = [
-          nix-on-droid.overlays.default
-        ];
-      };
-
-      extraSpecialArgs = {inherit inputs outputs;};
-      home-manager-path = home.outPath;
-
-      modules = [
-        ./nixos/nix-on-droid/configuration.nix
-
-        {
-          home-manager = {
-            config = ./. + "/home-manager/gokulswam@nix-on-droid/home.nix";
-            backupFileExtension = "hm-bak";
-            extraSpecialArgs = {inherit inputs outputs;};
-            useGlobalPkgs = true;
-          };
-        }
-      ];
-    };
 
     nixosConfigurations = {
       framework = nixpkgs.lib.nixosSystem {
