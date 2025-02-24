@@ -109,7 +109,7 @@
 
         {
           home-manager = {
-            config = [(./. + "/home-manager/gokulswam@nix-on-droid/home.nix")];
+            config = ./. + "/home-manager/gokulswam@nix-on-droid/home.nix";
             backupFileExtension = "hm-bak";
             extraSpecialArgs = {inherit inputs outputs;};
             useGlobalPkgs = true;
