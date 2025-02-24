@@ -6,15 +6,11 @@
   ...
 }: {
   imports = [
-    inputs.niri-flake.nixosModules.niri
     inputs.nixos-cosmic.nixosModules.default
-
-    ../scripts/start-cosmic-ext.nix
   ];
 
   nixpkgs = {
     overlays = [
-      inputs.niri-flake.overlays.niri
       inputs.nixpkgs-f2k.overlays.stdenvs
 
       # (final: prev: {
@@ -33,10 +29,8 @@
       inherit
         (pkgs)
         nautilus
-        swaybg
         wl-clipboard
         wayland-utils
-        xwayland-satellite-unstable
         cosmic-ext-applet-clipboard-manager
         cosmic-ext-applet-emoji-selector
         cosmic-ext-tweaks
@@ -50,11 +44,6 @@
     nautilus-open-any-terminal = {
       enable = true;
       terminal = "ghostty";
-    };
-
-    niri = {
-      enable = true;
-      package = pkgs.niri-unstable;
     };
 
     seahorse.enable = true;
