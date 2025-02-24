@@ -19,6 +19,6 @@
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
 
-  terminal.font = "${pkgs.terminus-nerdfont}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
+  terminal.font = "${pkgs.nerd-fonts.terminess-ttf}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
   user.shell = "${pkgs.zsh}/bin/zsh";
 }
