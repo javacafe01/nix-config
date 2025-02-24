@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    intputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.hmModules.nix-index
 
     (import ./../../home-manager/shared/programs/bat)
     (import ./../../home-manager/shared/programs/direnv)
