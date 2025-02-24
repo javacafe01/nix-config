@@ -34,6 +34,17 @@
     };
   };
 
+  nixpkgs = {
+    config.allowUnfree = true;
+
+    overlays = [
+      outputs.overlays.modifications
+      outputs.overlays.additions
+
+      inputs.nix-on-droid.overlays.default
+    ];
+  };
+
   programs = {
     bash = {
       interactiveShellInit = ''

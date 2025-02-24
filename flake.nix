@@ -100,8 +100,10 @@
     # NixOS configuration entrypoint
 
     nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-      pkgs = import nixpkgs {system = "aarch64-linux";};
-      specialArgs = {inherit inputs outputs;};
+      pkgs = nixpkgs.legacyPackages.aarch64-linux;
+      extraSpecialArgs = {inherit inputs outputs;};
+      home-manager-path = home.outPath;
+
       modules = [
         ./nixos/nix-on-droid/configuration.nix
 
