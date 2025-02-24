@@ -14,14 +14,6 @@
     '';
   };
 
-  nixpkgs = {
-    config.allowUnfree = true;
-
-    overlays = [
-      inputs.nix-on-droid.overlays.default
-    ];
-  };
-
   environment.etcBackupExtension = ".bak";
 
   # Read the changelog before changing this value
