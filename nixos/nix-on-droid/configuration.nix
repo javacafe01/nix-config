@@ -20,5 +20,5 @@
   system.stateVersion = "24.05";
 
   terminal.font = "${pkgs.nerd-fonts.terminess-ttf}/share/fonts/truetype/NerdFonts/TerminessNerdFontMono-Regular.ttf";
-  user.shell = "${pkgs.zsh}/bin/zsh";
+  user.shell = "${lib.getExe pkgs.zsh}";
 }
