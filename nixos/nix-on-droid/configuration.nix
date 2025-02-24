@@ -10,8 +10,6 @@
     inputs.nix-index-database.nixosModules.nix-index
   ];
 
-  environment.etcBackupExtension = ".bak";
-
   nix = {
     package = pkgs.lix;
 
@@ -38,33 +36,15 @@
     config.allowUnfree = true;
 
     overlays = [
-      outputs.overlays.modifications
-      outputs.overlays.additions
-
       inputs.nix-on-droid.overlays.default
     ];
   };
 
+  environment.etcBackupExtension = ".bak";
+
   programs = {
-    bash = {
-      interactiveShellInit = ''
-        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
-      '';
-
-      promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
-    };
-
-    command-not-found.enable = false;
-    nix-index-database.comma.enable = true;
+    bash.promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
     ssh.startAgent = true;
-
-    zsh = {
-      enable = true;
-
-      interactiveShellInit = ''
-        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
-      '';
-    };
   };
 
   # Read the changelog before changing this value

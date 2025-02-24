@@ -1,10 +1,14 @@
 {
+  inputs,
+  outputs,
   config,
   lib,
   pkgs,
   ...
 }: {
   imports = [
+    intputs.nix-index-database.hmModules.nix-index
+
     (import ./../../home-manager/shared/programs/bat)
     (import ./../../home-manager/shared/programs/direnv)
     (import ./../../home-manager/shared/programs/eza)
@@ -16,5 +20,9 @@
   ];
 
   home.stateVersion = "24.05";
-  nixpkgs.overlays = config.nixpkgs.overlays;
+
+  programs = {
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
+  };
 }
