@@ -16,7 +16,7 @@
     (import ./../../home-manager/shared/programs/git {inherit lib pkgs;})
     (import ../shared/programs/nixvim {inherit inputs lib pkgs;})
     (import ./../../home-manager/shared/programs/starship)
-    (import ./../../home-manager/shared/programs/zsh {inherit config pkgs;})
+    (import ./../../home-manager/shared/programs/zsh {inherit lib pkgs;})
   ];
 
   home.stateVersion = "24.05";
