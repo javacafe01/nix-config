@@ -1,4 +1,7 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+}: {
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -9,17 +12,9 @@
     dotDir = ".config/zsh";
 
     shellAliases = {
-      ls = "eza";
-      l = "ls -l";
-      la = "ls -a";
-      lla = "ls -la";
-      lt = "ls --tree";
-      cat = "bat --color always --plain";
+      cat = "${lib.getExe pkgs.bat} --color always --plain";
       grep = "grep --color=auto";
       c = "clear";
-      v = "nvim";
-      xwin = "Xephyr -br -ac -noreset -screen 1960x1600 :1";
-      xdisp = "DISPLAY=:1";
       rm = "${pkgs.trash-cli}/bin/trash-put";
     };
 

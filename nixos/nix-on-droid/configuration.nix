@@ -1,34 +1,36 @@
 {
+  inputs,
+  outputs,
   config,
   lib,
   pkgs,
   ...
 }: {
-  # Backup etc files instead of failing to activate generation if a file already exists in /etc
+  imports = [
+    inputs.nix-index-database.nixosModules.nix-index
+  ];
+
   environment.etcBackupExtension = ".bak";
 
-  home-manager.config = {pkgs, ...}: {
-    home.stateVersion = "24.05";
-    nixpkgs.overlays = config.nixpkgs.overlays;
-    imports = [
-      (import ./../../home-manager/shared/programs/bat {})
-      (import ./../../home-manager/shared/programs/direnv {inherit config;})
-      (import ./../../home-manager/shared/programs/eza {})
-      (import ./../../home-manager/shared/programs/fzf {})
-      (import ./../../home-manager/shared/programs/git {inherit lib pkgs;})
-      (import ./../../home-manager/shared/programs/starship {})
-      (import ./../../home-manager/shared/programs/zsh {
-        inherit config pkgs;
-      })
-    ];
+  nix = {
+    package = pkgs.lix;
 
-    home.packages = lib.attrValues {
-      inherit
-        (pkgs)
-        gh
-        git
-        neovim
-        ;
+    settings = {
+      experimental-features = "nix-command flakes";
+
+      substituters = [
+        "https://cache.nixos.org"
+        "https://cache.ngi0.nixos.org"
+        "https://nix-community.cachix.org"
+        "https://nix-on-droid.cachix.org"
+      ];
+
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "nix-on-droid.cachix.org-1:56snoMJTXmDRC1Ei24CmKoUqvHJ9XCp+nidK7qkMQrU="
+      ];
     };
   };
 

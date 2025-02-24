@@ -11,10 +11,8 @@
       window-padding-y = 20;
       window-decoration = "server";
       window-theme = "auto";
-      gtk-adwaita = true;
-      gtk-tabs-location = "bottom";
       gtk-titlebar-hide-when-maximized = true;
-      adw-toolbar-style = "flat";
+      adw-toolbar-style = "raised-border";
     };
   };
 }

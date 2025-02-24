@@ -5,6 +5,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    inputs.nix-index-database.nixosModules.nix-index
+  ];
+
   console.keyMap = "us";
 
   environment = {
@@ -14,26 +18,16 @@
     systemPackages = lib.attrValues {
       inherit
         (pkgs)
-        cmake
-        coreutils
         curl
-        fd
-        ffmpeg
-        fzf
-        gcc
         git
-        glib
-        gnumake
-        gnutls
         home-manager
-        imagemagick
         libtool
         lm_sensors
         man-pages
         man-pages-posix
-        ripgrep
         unrar
         unzip
+        sshpass
         vim
         wget
         xarchiver
@@ -51,6 +45,8 @@
   };
 
   nix = {
+    extraOptions = "builders-use-substitutes = true";
+
     # This will add each flake input as a registry
     # To make nix commands consistent with your flake
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
@@ -66,11 +62,12 @@
       auto-optimise-store = true;
 
       substituters = [
-        "https://cache.nixos.org?priority=10"
+        "https://cache.nixos.org"
         "https://cache.ngi0.nixos.org"
         "https://nix-community.cachix.org"
         "https://fortuneteller2k.cachix.org"
-        "https://cosmic.cachix.org/"
+        "https://cosmic.cachix.org"
+        "https://ghostty.cachix.org"
       ];
 
       trusted-public-keys = [
@@ -79,6 +76,11 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
         "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+        "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
+      ];
+
+      trusted-users = [
+        "gokulswam"
       ];
     };
   };
@@ -94,25 +96,12 @@
 
     command-not-found.enable = false;
     nix-index-database.comma.enable = true;
+    nix-ld.enable = true;
 
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        stdenv.cc.cc
-        openssl
-        curl
-        glib
-        util-linux
-        glibc
-        icu
-        libunwind
-        libuuid
-        zlib
-        libsecret
-      ];
+    ssh = {
+      forwardX11 = true;
+      startAgent = true;
     };
-
-    ssh.startAgent = true;
 
     zsh = {
       enable = true;
@@ -134,10 +123,10 @@
     mutableUsers = true;
     defaultUserShell = pkgs.zsh;
 
-    users.javacafe = {
-      description = "javacafe";
+    users.gokulswam = {
+      description = "gokulswam";
       isNormalUser = true;
-      home = "/home/javacafe";
+      home = "/home/gokulswam";
 
       extraGroups = ["wheel" "networkmanager" "sudo" "video" "audio"];
     };
