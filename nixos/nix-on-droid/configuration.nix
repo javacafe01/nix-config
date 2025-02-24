@@ -6,7 +6,13 @@
   pkgs,
   ...
 }: {
-  nix.package = pkgs.lix;
+  nix = {
+    package = pkgs.lix;
+
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
   nixpkgs = {
     config.allowUnfree = true;
@@ -17,11 +23,6 @@
   };
 
   environment.etcBackupExtension = ".bak";
-
-  programs = {
-    bash.promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
-    ssh.startAgent = true;
-  };
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
