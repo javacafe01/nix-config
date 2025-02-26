@@ -8,8 +8,13 @@
     piousdeer.adwaita-theme
     rvest.vs-code-prettier-eslint
     sndst00m.markdown-github-dark-pack
+    torn4dom4n.latex-support
   ];
 in {
+  home.packages = with pkgs; [
+    texlive.combined.scheme-full
+  ];
+
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = true;
@@ -18,6 +23,7 @@ in {
       extensions = with pkgs.vscode-extensions;
         [
           esbenp.prettier-vscode
+          james-yu.latex-workshop
           jnoortheen.nix-ide
           kamadorueda.alejandra
           ms-vscode.cpptools
