@@ -113,6 +113,7 @@
         fractal
         gnome-boxes
         nh
+        spot
         statix
         trash-cli
         xdg-user-dirs

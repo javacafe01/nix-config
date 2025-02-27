@@ -15,7 +15,7 @@
     };
 
     discord = {
-      package = pkgs.discord-canary;
+      package = pkgs.discord;
       vencord.unstable = true;
     };
 

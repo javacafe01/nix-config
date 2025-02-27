@@ -10,7 +10,6 @@
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
     ../shared/configuration.nix
-    ../shared/desktops/cosmic.nix
     ../shared/desktops/gnome.nix
     ./hardware-configuration.nix
   ];
@@ -36,7 +35,15 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages;
-    loader.systemd-boot.enable = true;
+
+    loader = {
+      efi.canTouchEfiVariables = true;
+
+      systemd-boot = {
+        enable = true;
+        consoleMode = "auto";
+      };
+    };
 
     plymouth = {
       enable = true;
@@ -58,10 +65,7 @@
       "udev.log_priority=3"
     ];
 
-    # Hide the OS choice for bootloaders.
-    # It's still possible to open the bootloader list by pressing any key
-    # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
+    loader.timeout = 5;
   };
 
   networking = {

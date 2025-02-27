@@ -48,6 +48,7 @@
     };
 
     nur.url = "github:nix-community/NUR";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix.url = "github:danth/stylix";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
