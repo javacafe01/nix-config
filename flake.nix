@@ -110,6 +110,22 @@
           }
         ];
       };
+
+      nixos-wsl = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/nixos-wsl/configuration.nix
+          home.nixosModules.home-manager
+
+          {
+            home-manager = {
+              backupFileExtension = "hm-back";
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.javacafe.imports = [(./. + "/home-manager/gokulswam@nixos-wsl/home.nix")];
+            };
+          }
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
