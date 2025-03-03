@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    (import ../shared/stylix/houseki {inherit inputs pkgs;})
+    (import ../shared/stylix/houseki {inherit config inputs pkgs;})
 
     (import ../shared/programs/bat)
     (import ../shared/programs/direnv)

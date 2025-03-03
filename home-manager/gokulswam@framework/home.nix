@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    (import ../shared/stylix/houseki {inherit inputs pkgs;})
+    (import ../shared/stylix/houseki {inherit config inputs pkgs;})
 
     (import ../shared/programs/bat)
     (import ../shared/programs/direnv)
@@ -81,7 +81,6 @@
           caffeine.extensionUuid
           dash-to-panel.extensionUuid
           rounded-window-corners-reborn.extensionUuid
-          tiling-shell.extensionUuid
           vertical-workspaces.extensionUuid
         ];
       };

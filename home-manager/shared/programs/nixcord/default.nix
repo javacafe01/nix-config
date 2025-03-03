@@ -16,7 +16,7 @@
 
     discord = {
       package = pkgs.discord;
-      vencord.unstable = true;
+      vencord.unstable = false;
     };
 
     quickCss = ''

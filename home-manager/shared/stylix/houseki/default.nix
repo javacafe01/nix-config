@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
 }: {
@@ -80,17 +81,25 @@
       gtk = {
         enable = true;
 
-        /*
         extraCss = with config.lib.stylix.colors; ''
-          tabbox {
-            background-color: #${base00};
+          /* Remove rounded corners */
+          .titlebar,
+          .titlebar .background,
+          decoration,
+          window,
+          window.background
+          {
+            border-radius: 0;
           }
 
-          tabbox tab:selected {
-            background-color: #${base01};
+          /* Remove csd shadows */
+          decoration,
+          decoration:backdrop,
+          window.background
+          {
+            box-shadow: none;
           }
         '';
-        */
 
         flatpakSupport.enable = true;
       };

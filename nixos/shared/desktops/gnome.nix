@@ -35,7 +35,6 @@
         caffeine
         dash-to-panel
         rounded-window-corners-reborn
-        tiling-shell
         vertical-workspaces
         ;
     };

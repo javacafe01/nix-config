@@ -88,7 +88,12 @@
     command-not-found.enable = false;
     nix-index-database.comma.enable = true;
     nix-ld.enable = true;
-    ssh.startAgent = true;
+
+    ssh = {
+      forwardX11 = true;
+      setXAuthLocation = true;
+      startAgent = true;
+    };
 
     zsh = {
       enable = true;
