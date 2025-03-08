@@ -80,7 +80,9 @@
           appindicator.extensionUuid
           caffeine.extensionUuid
           dash-to-panel.extensionUuid
+          pano.extensionUuid
           rounded-window-corners-reborn.extensionUuid
+          tiling-assistant.extensionUuid
           vertical-workspaces.extensionUuid
         ];
       };

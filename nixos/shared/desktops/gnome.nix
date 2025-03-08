@@ -34,7 +34,9 @@
         appindicator
         caffeine
         dash-to-panel
+        pano
         rounded-window-corners-reborn
+        tiling-assistant
         vertical-workspaces
         ;
     };
