@@ -45,9 +45,14 @@
         package = pkgs.noto-fonts-emoji-blob-bin;
       };
 
+      # monospace = {
+      #   name = "Liga SFMono Nerd Font";
+      #   package = pkgs.sfmonoNerdFontLig;
+      # };
+
       monospace = {
-        name = "Liga SFMono Nerd Font";
-        package = pkgs.sfmonoNerdFontLig;
+        name = "Kirsch Nerd Font";
+        package = inputs.kirsch.packages.${pkgs.system}.kirsch-nerd;
       };
 
       sansSerif = {
@@ -57,7 +62,8 @@
 
       sizes = {
         applications = 10;
-        terminal = 10;
+        # terminal = 10;
+        terminal = 12;
       };
     };
 
