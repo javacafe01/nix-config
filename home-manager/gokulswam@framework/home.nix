@@ -24,7 +24,7 @@
           id = 0;
 
           settings = {
-            "browser.startup.homepage" = "https://gokulswami.org";
+            "browser.startup.homepage" = "https://javacafe.sdf.org/startpage";
             "general.smoothScroll" = true;
           };
 
