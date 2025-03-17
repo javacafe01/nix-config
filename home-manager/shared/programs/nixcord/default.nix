@@ -12,7 +12,7 @@
 
     config = {
       plugins.themeAttributes.enable = true;
-      useQuickCss = false;
+      useQuickCss = true;
     };
 
     discord = {
@@ -20,8 +20,6 @@
       vencord.unstable = false;
     };
 
-    quickCss = ''
-      @import "https://raw.githack.com/GeopJr/DNOME/dist/DNOME.css";
-    '';
+    quickCss = pkgs.lib.readFile ./quickCss.css;
   };
 }

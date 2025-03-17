@@ -103,7 +103,7 @@
         flatpakSupport.enable = true;
       };
 
-      nixcord.enable = true;
+      nixcord.enable = false;
 
       nixvim = {
         enable = true;
