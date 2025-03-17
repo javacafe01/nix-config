@@ -7,11 +7,11 @@
   ...
 }: {
   imports = [
-    (import ../shared/stylix/houseki {inherit config inputs pkgs;})
+    ../shared/stylix/houseki
 
-    (import ../shared/programs/bat)
-    (import ../shared/programs/direnv)
-    (import ../shared/programs/eza)
+    ../shared/programs/bat
+    ../shared/programs/direnv
+    ../shared/programs/eza
 
     (import ../shared/programs/firefox {
       profiles = {
@@ -41,14 +41,15 @@
       };
     })
 
-    (import ../shared/programs/fzf)
-    (import ../shared/programs/ghostty)
-    (import ../shared/programs/git {inherit lib pkgs;})
-    (import ../shared/programs/nixcord {inherit inputs pkgs;})
-    (import ../shared/programs/nixvim {inherit inputs lib pkgs;})
-    (import ../shared/programs/starship)
-    (import ../shared/programs/vscode {inherit inputs pkgs;})
-    (import ../shared/programs/zsh {inherit lib pkgs;})
+    ../shared/programs/fzf
+    ../shared/programs/ghostty
+    ../shared/programs/git
+    ../shared/programs/nixcord
+    ../shared/programs/nixvim
+    ../shared/programs/starship
+    ../shared/programs/vscode
+    ../shared/programs/zed
+    ../shared/programs/zsh
   ];
 
   nixpkgs = {
@@ -59,8 +60,9 @@
       inputs.nixpkgs-f2k.overlays.stdenvs
       inputs.nur.overlays.default
 
-      (final: prev: {
-        ghostty = inputs.ghostty.packages.${pkgs.system}.default;
+      (_final: prev: {
+        ghostty = inputs.ghostty.packages.${_final.system}.default;
+        picom = inputs.nixpkgs-f2k.packages.${_final.system}.picom-git;
       })
     ];
 

@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  ...
 }: {
   imports = [
     inputs.stylix.homeManagerModules.stylix
@@ -10,7 +11,7 @@
   stylix = {
     enable = true;
     autoEnable = false;
-    image = ../../../../assets/wall.jpg;
+    image = ../../../../assets/wall.png;
 
     base16Scheme = {
       scheme = "houseki";
@@ -45,14 +46,9 @@
         package = pkgs.noto-fonts-emoji-blob-bin;
       };
 
-      # monospace = {
-      #   name = "Liga SFMono Nerd Font";
-      #   package = pkgs.sfmonoNerdFontLig;
-      # };
-
       monospace = {
-        name = "Kirsch Nerd Font";
-        package = inputs.kirsch.packages.${pkgs.system}.kirsch-nerd;
+        name = "Liga SFMono Nerd Font";
+        package = pkgs.sfmonoNerdFontLig;
       };
 
       sansSerif = {
@@ -62,8 +58,7 @@
 
       sizes = {
         applications = 10;
-        # terminal = 10;
-        terminal = 12;
+        terminal = 10;
       };
     };
 
@@ -88,7 +83,6 @@
         enable = true;
 
         extraCss = with config.lib.stylix.colors; ''
-          /* Remove rounded corners */
           .titlebar,
           .titlebar .background,
           decoration,
@@ -98,7 +92,6 @@
             border-radius: 0;
           }
 
-          /* Remove csd shadows */
           decoration,
           decoration:backdrop,
           window.background
@@ -121,7 +114,18 @@
         };
       };
 
+      nushell.enable = true;
       vim.enable = true;
+      tmux.enable = true;
+
+      vscode = {
+        enable = true;
+        profileNames = ["default"];
+      };
+
+      xfce.enable = true;
+      xresources.enable = true;
+      zed.enable = true;
     };
   };
 }

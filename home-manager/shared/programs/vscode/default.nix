@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }: let
@@ -70,7 +71,7 @@ in {
         };
 
         workbench = {
-          colorTheme = "Adwaita Dark & default syntax highlighting";
+          colorTheme = lib.mkForce "Adwaita Dark & default syntax highlighting";
           list.smoothScrolling = true;
           smoothScrolling = true;
         };

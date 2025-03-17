@@ -5,7 +5,7 @@
 }: {
   programs.zed-editor = {
     enable = true;
-    extensions = ["nix" "make"];
+    extensions = ["nix" "make" "lua"];
 
     userSettings = {
       assistant = {
@@ -31,14 +31,6 @@
       hour_format = "hour12";
       auto_update = false;
 
-      /*
-      theme = {
-        mode = "system";
-        light = "Adwaita Pastel Light";
-        dark = "Adwaita Pastel Dark";
-      };
-      */
-
       terminal = {
         alternate_scroll = "off";
         blinking = "off";
@@ -54,9 +46,9 @@
           TERM = "alacritty";
         };
 
-        font_family = "monospace";
-        font_features = null;
-        font_size = null;
+        # font_family = "monospace";
+        # font_features = null;
+        # font_size = null;
         line_height = "comfortable";
         option_as_meta = false;
         button = false;
@@ -70,9 +62,9 @@
       };
 
       lsp = {
-        rust-analyzer = {
+        lua-language-server = {
           binary = {
-            path = lib.getExe pkgs.rust-analyzer;
+            path = lib.getExe pkgs.lua-language-server;
           };
         };
 
@@ -81,9 +73,30 @@
             path = lib.getExe pkgs.nixd;
           };
         };
+
+        rust-analyzer = {
+          binary = {
+            path = lib.getExe pkgs.rust-analyzer;
+          };
+        };
       };
 
       languages = {
+        lua = {
+          formatter = {
+            external = {
+              command = "${lib.getBin pkgs.stylua}";
+              arguments = [
+                "--syntax=Lua54"
+                "--respect-ignores"
+                "--stdin-filepath"
+                "{buffer_path}"
+                "-"
+              ];
+            };
+          };
+        };
+
         nix = {
           formatter = {
             external = {
@@ -94,7 +107,7 @@
         };
       };
 
-      vim_mode = true;
+      vim_mode = false;
       load_direnv = "shell_hook";
       base_keymap = "VSCode";
       show_whitespaces = "none";
