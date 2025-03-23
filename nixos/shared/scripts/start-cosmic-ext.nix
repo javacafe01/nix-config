@@ -65,9 +65,9 @@
                 fi
                 # Run cosmic-session
                 if [[ -z "''${DBUS_SESSION_BUS_ADDRESS}" ]]; then
-                    exec dbus-run-session -- cosmic-session niri
+                    exec dbus-run-session -- cosmic-session niri --session
                 else
-                    exec cosmic-session niri
+                    exec cosmic-session niri --session
                 fi
               '';
             }}/bin/start-cosmic-ext-niri
