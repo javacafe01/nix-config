@@ -7,13 +7,14 @@
   ...
 }: {
   imports = [
-    inputs.lix-module.nixosModules.default
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
     ../shared/configuration.nix
-    ../shared/desktops/gnome.nix
+    ../shared/desktops/cosmic-on-niri.nix
     ./hardware-configuration.nix
   ];
+
+  nix.package = pkgs.lix;
 
   nixpkgs = {
     config.allowUnfree = true;
@@ -46,11 +47,7 @@
       };
     };
 
-    plymouth = {
-      enable = true;
-      # theme = "nixos-bgrt";
-      # themePackages = with pkgs; [nixos-bgrt-plymouth];
-    };
+    plymouth.enable = true;
 
     # Enable "Silent Boot"
     consoleLogLevel = 0;

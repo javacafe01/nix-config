@@ -5,8 +5,19 @@
     # Nixpkgs Repos
     nixos-old.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     master.url = "github:nixos/nixpkgs";
+
+    cosmic-manager = {
+      url = "github:HeitorAugustoLN/cosmic-manager";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home";
+      };
+    };
+
+    crane.url = "github:ipetkov/crane";
 
     ghostty = {
       url = "github:ghostty-org/ghostty";
@@ -53,6 +64,11 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # Other Non-flake Inputs
+    cosmic-ext-alternative-startup-src = {
+      url = "github:Drakulix/cosmic-ext-alternative-startup";
+      flake = false;
+    };
+
     sfmonoNerdFontLig-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;

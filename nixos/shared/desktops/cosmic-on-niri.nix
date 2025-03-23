@@ -6,11 +6,15 @@
   ...
 }: {
   imports = [
+    inputs.niri-flake.nixosModules.niri
     inputs.nixos-cosmic.nixosModules.default
+
+    ../scripts/start-cosmic-ext.nix
   ];
 
   nixpkgs = {
     overlays = [
+      inputs.niri-flake.overlays.niri
       inputs.nixpkgs-f2k.overlays.stdenvs
 
       # (final: prev: {
@@ -31,6 +35,10 @@
         nautilus
         wl-clipboard
         wayland-utils
+        libsecret
+        xwayland-satellite-unstable
+        swaybg
+        # Cosmic specific
         cosmic-ext-applet-clipboard-manager
         cosmic-ext-applet-emoji-selector
         cosmic-ext-tweaks
@@ -46,12 +54,23 @@
       terminal = "ghostty";
     };
 
+    niri = {
+      enable = true;
+      package = pkgs.niri-unstable;
+    };
+
     seahorse.enable = true;
   };
 
   services = {
     desktopManager.cosmic.enable = true;
-    # displayManager.cosmic-greeter.enable = true;
+    displayManager.cosmic-greeter.enable = true;
+
+    # xserver.displayManager.gdm = {
+    #   enable = true;
+    #   wayland = true;
+    # };
+
     gnome.sushi.enable = true;
     gvfs.enable = true;
   };

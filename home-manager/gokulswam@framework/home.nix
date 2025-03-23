@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    ../shared/stylix/houseki
+    ../shared/stylix/vesper
 
     ../shared/programs/bat
     ../shared/programs/direnv
@@ -24,7 +24,7 @@
           id = 0;
 
           settings = {
-            "browser.startup.homepage" = "https://javacafe.sdf.org/startpage";
+            "browser.startup.homepage" = "https://gokulswam.github.io/";
             "general.smoothScroll" = true;
           };
 
@@ -44,11 +44,11 @@
     ../shared/programs/fzf
     ../shared/programs/ghostty
     ../shared/programs/git
+    ../shared/programs/niri
     ../shared/programs/nixcord
     ../shared/programs/nixvim
     ../shared/programs/starship
     ../shared/programs/vscode
-    ../shared/programs/zed
     ../shared/programs/zsh
   ];
 
@@ -165,4 +165,8 @@
       videos = "${config.home.homeDirectory}/Videos";
     };
   };
+
+  xresources.extraConfig = ''
+    Xft.dpi: 192
+  '';
 }

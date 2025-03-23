@@ -27,8 +27,13 @@
     inherit
       (pkgs)
       adwaita-icon-theme
+      gtk3
+      gtk3-x11
+      gtk4
+      inotify-tools
       libnotify
       nautilus
+      pamixer
       ;
   };
 
