@@ -1,7 +1,5 @@
 {
   inputs,
-  outputs,
-  config,
   pkgs,
   ...
 }: {
@@ -17,7 +15,7 @@
       #   });
       # })
 
-      (_final: prev: {
+      (_final: _prev: {
         awesome = inputs.nixpkgs-f2k.packages.${_final.system}.awesome-git;
       })
     ];

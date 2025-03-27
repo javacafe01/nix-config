@@ -61,7 +61,7 @@
       inputs.nixpkgs-f2k.overlays.stdenvs
       inputs.nur.overlays.default
 
-      (_final: prev: {
+      (_final: _prev: {
         ghostty = inputs.ghostty.packages.${_final.system}.default;
       })
     ];
