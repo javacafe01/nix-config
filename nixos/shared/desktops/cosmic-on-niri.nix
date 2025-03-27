@@ -16,12 +16,6 @@
     overlays = [
       inputs.niri-flake.overlays.niri
       inputs.nixpkgs-f2k.overlays.stdenvs
-
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
   };
 
@@ -38,7 +32,10 @@
         libsecret
         xwayland-satellite-unstable
         swaybg
-        # Cosmic specific
+        ;
+      inherit
+        (inputs.nixos-cosmic.packages.${pkgs.system})
+        cosmic-ext-applet-caffeine
         cosmic-ext-applet-clipboard-manager
         cosmic-ext-applet-emoji-selector
         cosmic-ext-tweaks
@@ -64,12 +61,12 @@
 
   services = {
     desktopManager.cosmic.enable = true;
-    displayManager.cosmic-greeter.enable = true;
+    # displayManager.cosmic-greeter.enable = true;
 
-    # xserver.displayManager.gdm = {
-    #   enable = true;
-    #   wayland = true;
-    # };
+    xserver.displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
 
     gnome.sushi.enable = true;
     gvfs.enable = true;
@@ -80,9 +77,11 @@
     xdgOpenUsePortal = true;
 
     extraPortals = [
-      pkgs.xdg-desktop-portal-cosmic
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+      inputs.nixos-cosmic.packages.${pkgs.system}.xdg-desktop-portal-cosmic
     ];
 
-    config.common.default = "*";
+    configPackages = with pkgs; [niri-unstable];
   };
 }

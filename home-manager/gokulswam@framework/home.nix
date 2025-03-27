@@ -7,9 +7,10 @@
   ...
 }: {
   imports = [
-    ../shared/stylix/vesper
+    ../shared/stylix/houseki
 
     ../shared/programs/bat
+    ../shared/programs/cosmic-manager
     ../shared/programs/direnv
     ../shared/programs/eza
 
@@ -62,7 +63,6 @@
 
       (_final: prev: {
         ghostty = inputs.ghostty.packages.${_final.system}.default;
-        picom = inputs.nixpkgs-f2k.packages.${_final.system}.picom-git;
       })
     ];
 
@@ -75,20 +75,6 @@
 
   dconf = {
     settings = {
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-
-        enabled-extensions = with pkgs.gnomeExtensions; [
-          appindicator.extensionUuid
-          caffeine.extensionUuid
-          dash-to-panel.extensionUuid
-          pano.extensionUuid
-          rounded-window-corners-reborn.extensionUuid
-          tiling-assistant.extensionUuid
-          vertical-workspaces.extensionUuid
-        ];
-      };
-
       "org/virt-manager/virt-manager/connections" = {
         autoconnect = ["qemu:///system"];
         uris = ["qemu:///system"];
@@ -151,6 +137,8 @@
   };
 
   programs.home-manager.enable = true;
+  programs.helix.enable = true;
+  programs.micro.enable = true;
 
   systemd.user.startServices = "sd-switch";
 
@@ -165,8 +153,4 @@
       videos = "${config.home.homeDirectory}/Videos";
     };
   };
-
-  xresources.extraConfig = ''
-    Xft.dpi: 192
-  '';
 }

@@ -7,14 +7,13 @@
   ...
 }: {
   imports = [
+    inputs.determinate.nixosModules.default
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
     ../shared/configuration.nix
     ../shared/desktops/cosmic-on-niri.nix
     ./hardware-configuration.nix
   ];
-
-  nix.package = pkgs.lix;
 
   nixpkgs = {
     config.allowUnfree = true;
@@ -83,8 +82,6 @@
       secretsFile = "/run/secrets/wireless.conf";
     };
   };
-
-  services.xserver.dpi = 192;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

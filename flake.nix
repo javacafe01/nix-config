@@ -19,6 +19,8 @@
 
     crane.url = "github:ipetkov/crane";
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs-unstable.follows = "nixpkgs";
@@ -26,11 +28,6 @@
 
     home = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

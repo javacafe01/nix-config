@@ -76,8 +76,6 @@
 
       fzf.enable = true;
       ghostty.enable = true;
-      gnome.enable = true;
-      gnome-text-editor.enable = true;
 
       gtk = {
         enable = true;
@@ -103,6 +101,8 @@
         flatpakSupport.enable = true;
       };
 
+      helix.enable = true;
+      micro.enable = true;
       nixcord.enable = false;
 
       nixvim = {
@@ -114,7 +114,6 @@
         };
       };
 
-      nushell.enable = true;
       vim.enable = true;
       tmux.enable = true;
 
@@ -123,8 +122,6 @@
         profileNames = ["default"];
       };
 
-      xfce.enable = true;
-      xresources.enable = true;
       zed.enable = true;
     };
   };

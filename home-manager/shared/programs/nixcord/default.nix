@@ -9,17 +9,7 @@
 
   programs.nixcord = {
     enable = true;
-
-    config = {
-      plugins.themeAttributes.enable = true;
-      useQuickCss = true;
-    };
-
-    discord = {
-      package = pkgs.discord;
-      vencord.unstable = false;
-    };
-
-    quickCss = pkgs.lib.readFile ./quickCss.css;
+    discord.enable = false;
+    vesktop.enable = true;
   };
 }
