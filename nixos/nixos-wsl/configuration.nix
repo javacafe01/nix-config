@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    inputs.lix-module.nixosModules.default
     inputs.nixos-wsl.nixosModules.wsl
     inputs.vscode-server.nixosModules.default
 
