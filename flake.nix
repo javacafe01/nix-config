@@ -134,7 +134,7 @@
             home-manager = {
               backupFileExtension = "hm-back";
               extraSpecialArgs = {inherit inputs outputs;};
-              users.javacafe.imports = [(./. + "/home-manager/gokulswam@nixos-wsl/home.nix")];
+              users.gokulswam.imports = [(./. + "/home-manager/gokulswam@nixos-wsl/home.nix")];
             };
           }
         ];
