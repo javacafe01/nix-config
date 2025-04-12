@@ -76,33 +76,13 @@
 
       fzf.enable = true;
       ghostty.enable = true;
+      gnome.enable = true;
 
       gtk = {
         enable = true;
-
-        extraCss = with config.lib.stylix.colors; ''
-          .titlebar,
-          .titlebar .background,
-          decoration,
-          window,
-          window.background
-          {
-            border-radius: 0;
-          }
-
-          decoration,
-          decoration:backdrop,
-          window.background
-          {
-            box-shadow: none;
-          }
-        '';
-
         flatpakSupport.enable = true;
       };
 
-      helix.enable = true;
-      micro.enable = true;
       nixcord.enable = false;
 
       nixvim = {

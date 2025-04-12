@@ -5,7 +5,12 @@
 
   programs.nixcord = {
     enable = true;
-    discord.enable = false;
-    vesktop.enable = true;
+
+    config = {
+      frameless = true;
+    };
+
+    discord.enable = true;
+    vesktop.enable = false;
   };
 }

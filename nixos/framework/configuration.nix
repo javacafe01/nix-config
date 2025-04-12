@@ -10,7 +10,7 @@
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
     ../shared/configuration.nix
-    ../shared/desktops/cosmic-on-niri.nix
+    ../shared/desktops/gnome.nix
     ./hardware-configuration.nix
   ];
 

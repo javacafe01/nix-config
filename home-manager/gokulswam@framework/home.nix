@@ -10,7 +10,7 @@
     ../shared/stylix/houseki
 
     ../shared/programs/bat
-    ../shared/programs/cosmic-manager
+    # ../shared/programs/cosmic-manager
     ../shared/programs/direnv
     ../shared/programs/eza
 
@@ -25,7 +25,7 @@
           id = 0;
 
           settings = {
-            "browser.startup.homepage" = "https://gokulswam.github.io/";
+            "browser.startup.homepage" = "https://javacafe01.github.io/startpage";
             "general.smoothScroll" = true;
           };
 
@@ -45,10 +45,11 @@
     ../shared/programs/fzf
     ../shared/programs/ghostty
     ../shared/programs/git
-    ../shared/programs/niri
+    # ../shared/programs/niri
     ../shared/programs/nixcord
     ../shared/programs/nixvim
     ../shared/programs/starship
+    ../shared/programs/vivaldi
     ../shared/programs/vscode
     ../shared/programs/zsh
   ];
@@ -75,6 +76,20 @@
 
   dconf = {
     settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          appindicator.extensionUuid
+          caffeine.extensionUuid
+          dash-to-panel.extensionUuid
+          pano.extensionUuid
+          rounded-window-corners-reborn.extensionUuid
+          tiling-assistant.extensionUuid
+          vertical-workspaces.extensionUuid
+        ];
+      };
+
       "org/virt-manager/virt-manager/connections" = {
         autoconnect = ["qemu:///system"];
         uris = ["qemu:///system"];
@@ -98,10 +113,12 @@
       inherit
         (pkgs)
         alejandra
+        darktable
         deadnix
         fractal
         gnome-boxes
         nh
+        parsec-bin
         spot
         statix
         trash-cli
@@ -137,8 +154,6 @@
   };
 
   programs.home-manager.enable = true;
-  programs.helix.enable = true;
-  programs.micro.enable = true;
 
   systemd.user.startServices = "sd-switch";
 

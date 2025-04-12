@@ -120,7 +120,7 @@
           autohover_delay_ms = cosmicLib.cosmic.mkRon "optional" 500;
           expand_to_edges = true;
           autohide = cosmicLib.cosmic.mkRon "optional" null;
-          plugins_wings = cosmicLib.cosmic.mkRon "raw" "Some(([\n    \"com.system76.CosmicPanelAppButton\",\n], [\n    \"com.system76.CosmicAppletStatusArea\",\n    \"io.github.wiiznokes.cosmic-ext-applet-clipboard-manager\",\n    \"com.system76.CosmicAppletNotifications\",\n    \"com.system76.CosmicAppletAudio\",\n    \"com.system76.CosmicAppletNetwork\",\n    \"com.system76.CosmicAppletBluetooth\",\n    \"com.system76.CosmicAppletBattery\",\n    \"com.system76.CosmicAppletPower\",\n]))\n";
+          plugins_wings = cosmicLib.cosmic.mkRon "raw" "Some(([\n    \"com.system76.CosmicPanelAppButton\",\n    \"com.system76.CosmicAppList\",\n], [\n    \"com.system76.CosmicAppletStatusArea\",\n    \"io.github.wiiznokes.cosmic-ext-applet-clipboard-manager\",\n    \"com.system76.CosmicAppletNotifications\",\n    \"com.system76.CosmicAppletAudio\",\n    \"com.system76.CosmicAppletNetwork\",\n    \"com.system76.CosmicAppletBluetooth\",\n    \"com.system76.CosmicAppletBattery\",\n    \"com.system76.CosmicAppletPower\",\n]))\n";
           size_wings = cosmicLib.cosmic.mkRon "optional" null;
           background = cosmicLib.cosmic.mkRon "raw" "ThemeDefault";
           anchor_gap = false;

@@ -1,77 +1,6 @@
 {
   description = "javacafe's nix config";
 
-  inputs = {
-    # Nixpkgs Repos
-    nixos-old.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixos.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    master.url = "github:nixos/nixpkgs";
-
-    cosmic-manager = {
-      url = "github:HeitorAugustoLN/cosmic-manager";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home";
-      };
-    };
-
-    crane.url = "github:ipetkov/crane";
-
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
-
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
-    };
-
-    home = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    niri-flake.url = "github:sodiboo/niri-flake";
-
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixcord.url = "github:kaylorben/nixcord";
-    nixgl.url = "github:nix-community/nixGL";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur.url = "github:nix-community/NUR";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    stylix.url = "github:danth/stylix";
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-
-    # Other Non-flake Inputs
-    cosmic-ext-alternative-startup-src = {
-      url = "github:Drakulix/cosmic-ext-alternative-startup";
-      flake = false;
-    };
-
-    sfmonoNerdFontLig-src = {
-      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
-      flake = false;
-    };
-  };
-
   outputs = {
     self,
     nixpkgs,
@@ -152,6 +81,118 @@
           (./. + "/home-manager/gokulswam@ubuntu-wsl/home.nix")
         ];
       };
+    };
+  };
+
+  inputs = {
+    # Nixpkgs Repos
+    nixpkgs = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixpkgs-unstable";
+    };
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+
+    ghostty = {
+      type = "github";
+      owner = "ghostty-org";
+      repo = "ghostty";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
+
+    home = {
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-index-database = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-vscode-extensions = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nix-vscode-extensions";
+    };
+
+    nixcord = {
+      type = "github";
+      owner = "kaylorben";
+      repo = "nixcord";
+    };
+
+    nixgl = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixGL";
+    };
+
+    nixos-hardware = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixos-hardware";
+    };
+
+    nixpkgs-f2k = {
+      type = "github";
+      owner = "fortuneteller2k";
+      repo = "nixpkgs-f2k";
+    };
+
+    nixos-wsl = {
+      type = "github";
+      owner = "nix-community";
+      repo = "NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nur = {
+      type = "github";
+      owner = "nix-community";
+      repo = "NUR";
+    };
+
+    spicetify-nix = {
+      type = "github";
+      owner = "Gerg-L";
+      repo = "spicetify-nix";
+    };
+
+    stylix = {
+      type = "github";
+      owner = "danth";
+      repo = "stylix";
+    };
+
+    vscode-server = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixos-vscode-server";
+    };
+
+    # Other Non-flake Inputs
+    cosmic-ext-alternative-startup-src = {
+      url = "github:Drakulix/cosmic-ext-alternative-startup";
+      flake = false;
+    };
+
+    sfmonoNerdFontLig-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
     };
   };
 }
