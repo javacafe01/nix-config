@@ -37,22 +37,6 @@
     # NixOS configuration entrypoint
 
     nixosConfigurations = {
-      framework = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/framework/configuration.nix
-          home.nixosModules.home-manager
-
-          {
-            home-manager = {
-              backupFileExtension = "hm-back";
-              extraSpecialArgs = {inherit inputs outputs;};
-              users.gokulswam.imports = [(./. + "/home-manager/gokulswam@framework/home.nix")];
-            };
-          }
-        ];
-      };
-
       nixos-wsl = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -63,7 +47,7 @@
             home-manager = {
               backupFileExtension = "hm-back";
               extraSpecialArgs = {inherit inputs outputs;};
-              users.gokulswam.imports = [(./. + "/home-manager/gokulswam@nixos-wsl/home.nix")];
+              users.gokulswam.imports = [(./. + "/home-manager/javacafe@nixos-wsl/home.nix")];
             };
           }
         ];
@@ -73,12 +57,12 @@
     # Standalone home-manager configuration entrypoint
 
     homeConfigurations = {
-      "gokulswam@ubuntu-wsl" = home.lib.homeManagerConfiguration {
+      "javacafe@framework" = home.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
 
         modules = [
-          (./. + "/home-manager/gokulswam@ubuntu-wsl/home.nix")
+          (./. + "/home-manager/javacafe@framework/home.nix")
         ];
       };
     };
@@ -134,12 +118,6 @@
       repo = "nixGL";
     };
 
-    nixos-hardware = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixos-hardware";
-    };
-
     nixpkgs-f2k = {
       type = "github";
       owner = "fortuneteller2k";
@@ -160,18 +138,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = {
-      type = "github";
-      owner = "nix-community";
-      repo = "NUR";
-    };
-
-    spicetify-nix = {
-      type = "github";
-      owner = "Gerg-L";
-      repo = "spicetify-nix";
-    };
-
     stylix = {
       type = "github";
       owner = "danth";
@@ -185,11 +151,6 @@
     };
 
     # Other Non-flake Inputs
-    cosmic-ext-alternative-startup-src = {
-      url = "github:Drakulix/cosmic-ext-alternative-startup";
-      flake = false;
-    };
-
     sfmonoNerdFontLig-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;

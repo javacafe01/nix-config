@@ -48,7 +48,7 @@
       };
     };
 
-    homeDirectory = "/home/gokulswam";
+    homeDirectory = "/home/javacafe";
 
     packages = lib.attrValues {
       inherit
@@ -67,9 +67,15 @@
       "${config.home.homeDirectory}/.local/bin"
     ];
 
+    sessionVariables = {
+      EDITOR = "nvim";
+      XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
+    };
+
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
-    username = "gokulswam";
+    username = "javacafe";
   };
 
   programs = {
@@ -83,5 +89,5 @@
   };
 
   systemd.user.startServices = "sd-switch";
-  targets.genericLinux.enable = true;
+  targets.genericLinux.enable = false;
 }

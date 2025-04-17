@@ -2,17 +2,19 @@
   config,
   inputs,
   pkgs,
+  colorScheme ? "houseki",
   ...
 }: {
   imports = [
     inputs.stylix.homeManagerModules.stylix
+
+    ./colors/${colorScheme}.nix
   ];
 
   stylix = {
     enable = true;
     autoEnable = false;
-    image = ../../../../assets/wall.png;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
+    image = ./wall.png;
 
     cursor = {
       package = pkgs.phinger-cursors;
@@ -47,39 +49,10 @@
     targets = {
       bat.enable = true;
       eog.enable = true;
-
-      firefox = {
-        enable = true;
-        firefoxGnomeTheme.enable = true;
-        profileNames = ["myprofile"];
-      };
-
-      fzf.enable = true;
       ghostty.enable = true;
-      gnome.enable = true;
-      gnome-text-editor.enable = true;
 
       gtk = {
         enable = true;
-
-        extraCss = with config.lib.stylix.colors; ''
-          .titlebar,
-          .titlebar .background,
-          decoration,
-          window,
-          window.background
-          {
-            border-radius: 0;
-          }
-
-          decoration,
-          decoration:backdrop,
-          window.background
-          {
-            box-shadow: none;
-          }
-        '';
-
         flatpakSupport.enable = true;
       };
 
@@ -94,18 +67,7 @@
         };
       };
 
-      nushell.enable = true;
       vim.enable = true;
-      tmux.enable = true;
-
-      vscode = {
-        enable = true;
-        profileNames = ["default"];
-      };
-
-      xfce.enable = true;
-      xresources.enable = true;
-      zed.enable = true;
     };
   };
 }

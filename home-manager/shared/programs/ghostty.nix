@@ -1,7 +1,6 @@
 {
   programs.ghostty = {
     enable = true;
-    enableZshIntegration = true;
 
     settings = {
       command = "~/.nix-profile/bin/zsh";

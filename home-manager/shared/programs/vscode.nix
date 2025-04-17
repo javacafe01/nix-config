@@ -22,6 +22,7 @@ in {
           jnoortheen.nix-ide
           kamadorueda.alejandra
           ms-vscode.cpptools
+          ms-vscode-remote.vscode-remote-extensionpack
           mkhl.direnv
           sumneko.lua
           xaver.clang-format
