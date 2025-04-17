@@ -14,7 +14,7 @@
   stylix = {
     enable = true;
     autoEnable = false;
-    image = ./wall.png;
+    image = ./wall.webp;
 
     cursor = {
       package = pkgs.phinger-cursors;
@@ -50,6 +50,7 @@
       bat.enable = true;
       eog.enable = true;
       ghostty.enable = true;
+      gnome.enable = true;
 
       gtk = {
         enable = true;
