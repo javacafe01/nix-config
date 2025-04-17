@@ -37,6 +37,13 @@
     # NixOS configuration entrypoint
 
     nixosConfigurations = {
+       homelab = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/homelab/configuration.nix
+        ];
+      };
+
       nixos-wsl = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [

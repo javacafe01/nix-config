@@ -18,16 +18,20 @@
     systemPackages = lib.attrValues {
       inherit
         (pkgs)
+	alejandra
         curl
+	deadnix
         git
         home-manager
         libtool
         lm_sensors
         man-pages
         man-pages-posix
+	nh
         unrar
         unzip
         sshpass
+	statix
         vim
         wget
         xarchiver
