@@ -6,10 +6,11 @@
   ...
 }: {
   imports = [
-    inputs.determinate.nixosModules.default
+    inputs.disko.nixosModules.disko
     inputs.vscode-server.nixosModules.default
 
     ../shared/configuration.nix
+    ./disk-config.nix
     ./hardware-configuration.nix
   ];
 
@@ -39,6 +40,7 @@
 
   networking = {
     hostName = "homelab";
+    useDHCP = false;
     networkmanager.enable = true;
   };
 
@@ -56,6 +58,7 @@
 
       settings = {
         PasswordAuthentication = true;
+        PermitRootLogin = "yes";
         AllowUsers = null;
         UseDns = true;
         X11Forwarding = true;

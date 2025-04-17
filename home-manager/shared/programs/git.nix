@@ -24,8 +24,8 @@
 
   programs.git = {
     enable = true;
-    userName = "javacafe";
-    userEmail = "javacafe@sdf.org";
+    userName = "Gokul Swami";
+    userEmail = "gokulswamilive@gmail.com";
 
     extraConfig.core.editor = "nvim";
   };

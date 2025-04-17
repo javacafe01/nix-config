@@ -48,7 +48,7 @@
       };
     };
 
-    homeDirectory = "/home/javacafe";
+    homeDirectory = "/home/gokulswam";
 
     packages = lib.attrValues {
       inherit
@@ -75,7 +75,7 @@
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
-    username = "javacafe";
+    username = "gokulswam";
   };
 
   programs = {

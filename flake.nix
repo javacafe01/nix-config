@@ -37,7 +37,23 @@
     # NixOS configuration entrypoint
 
     nixosConfigurations = {
-       homelab = nixpkgs.lib.nixosSystem {
+      framework = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/framework/configuration.nix
+          home.nixosModules.home-manager
+
+          {
+            home-manager = {
+              backupFileExtension = "hm-back";
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.gokulswam.imports = [(./. + "/home-manager/gokulswam@framework/home.nix")];
+            };
+          }
+        ];
+      };
+
+      homelab = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/homelab/configuration.nix
@@ -60,19 +76,6 @@
         ];
       };
     };
-
-    # Standalone home-manager configuration entrypoint
-
-    homeConfigurations = {
-      "javacafe@framework" = home.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-
-        modules = [
-          (./. + "/home-manager/javacafe@framework/home.nix")
-        ];
-      };
-    };
   };
 
   inputs = {
@@ -85,6 +88,12 @@
     };
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+
+    disko = {
+      type = "github";
+      owner = "nix-community";
+      repo = "disko";
+    };
 
     ghostty = {
       type = "github";

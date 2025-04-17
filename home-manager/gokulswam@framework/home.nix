@@ -22,6 +22,7 @@
     ../shared/programs/nixcord.nix
     ../shared/programs/nixvim.nix
     ../shared/programs/starship.nix
+    ../shared/programs/vivaldi
     ../shared/programs/vscode.nix
     ../shared/programs/zsh.nix
   ];
@@ -31,11 +32,8 @@
       outputs.overlays.modifications
       outputs.overlays.additions
 
-      inputs.nixpkgs-f2k.overlays.stdenvs
-
       (_final: _prev: {
-        ghostty = config.lib.nixGL.wrap inputs.ghostty.packages.${_final.system}.default;
-        vscode = config.lib.nixGL.wrap _prev.vscode;
+        ghostty = inputs.ghostty.packages.${_final.system}.default;
       })
     ];
 
@@ -43,6 +41,29 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+    };
+  };
+
+  dconf = {
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          appindicator.extensionUuid
+          caffeine.extensionUuid
+          dash-to-panel.extensionUuid
+          pano.extensionUuid
+          rounded-window-corners-reborn.extensionUuid
+          tiling-assistant.extensionUuid
+          vertical-workspaces.extensionUuid
+        ];
+      };
+
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = ["qemu:///system"];
+        uris = ["qemu:///system"];
+      };
     };
   };
 
@@ -56,7 +77,7 @@
       };
     };
 
-    homeDirectory = "/home/javacafe";
+    homeDirectory = "/home/gokulswam";
 
     packages = lib.attrValues {
       inherit
@@ -66,8 +87,8 @@
         deadnix
         fractal
         gnome-boxes
+        moonlight
         nh
-        parsec-bin
         spot
         statix
         trash-cli
@@ -91,7 +112,6 @@
     ];
 
     sessionVariables = {
-      NIXOS_OZONE_WL = 1;
       BROWSER = "vivaldi";
       EDITOR = "nvim";
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
@@ -102,27 +122,22 @@
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
-    username = "javacafe";
+    username = "gokulswam";
   };
 
-  nixGL = {
-    packages = inputs.nixgl.packages;
-    defaultWrapper = "mesa";
-    installScripts = ["mesa"];
-    vulkan.enable = false;
-  };
-
-  programs = {
-    bash = {
-      enable = true;
-      enableVteIntegration = true;
-      initExtra = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
-    };
-
-    home-manager.enable = true;
-    nix-index-database.comma.enable = true;
-  };
+  programs.home-manager.enable = true;
 
   systemd.user.startServices = "sd-switch";
-  targets.genericLinux.enable = true;
+
+  xdg = {
+    enable = true;
+
+    userDirs = {
+      enable = true;
+      documents = "${config.home.homeDirectory}/Documents";
+      music = "${config.home.homeDirectory}/Music";
+      pictures = "${config.home.homeDirectory}/Pictures";
+      videos = "${config.home.homeDirectory}/Videos";
+    };
+  };
 }
